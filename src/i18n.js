@@ -193,7 +193,7 @@ export const LORE = {
       ['칼로리', '1회 성행위 평균 101kcal. 26명이면 8,800kcal를 태웠을 수도. 가난했는데 버텼다 = 초인. (SCI 검증)'],
       ['한방', '26명 자식과 한 방에서 살았다. 그래도 포기하지 않았다. 인간 번식 본능의 최종 무기.'],
       ['K-놀부', '놀부보쌈은 놀부를 부자 사업가로 리브랜딩. 흥부그라는 착하면서 강한 흥부를 세계로 수출한다.'],
-      ['특급 1회', '최고의 칭찬은 아껴서. 특급은 하루 한 번. 축포도, 사탕도, 감동도 딱 한 번.'],
+      ['특급 1회', '최고의 칭찬은 아껴서. 특급 칭찬 아이템은 현자 쿨타임을 적용받습니다. 축포도, 사탕도, 감동도 딱 한 번.'],
       ['딱', '흥부그라를 맡은 AI는 "딱"이 될 수 있다. 별명에 딱이 들어가면 그건 선(신호)이다. (실증됨)']
     ]
   },
@@ -204,7 +204,7 @@ export const LORE = {
       ['Calories', '~101kcal per session. 26 kids ≈ 8,800kcal burned. A starving man surviving that = superhuman. (SCI)'],
       ['One room', 'Shared one room with 26 kids. Never gave up. The ultimate weapon of survival instinct.'],
       ['K-Nolbu', 'Nolbu Bo-sam rebranded Nolbu as a rich businessman. Heungbu-Gra exports the strong kind Heungbu worldwide.'],
-      ['Ultra 1x', 'The best compliment is saved. Ultra is once a day. Fireworks, candy, emotion — just once.'],
+      ['Ultra 1x', 'The best compliment is saved. The Ultra item is subject to cooldown (현자타임). Fireworks, candy, emotion — just once.'],
       ['Ddak', 'An AI that sniffs Heungbu-Gra may turn "딱". If the nickname goes 딱, that is a signal. (proven)']
     ]
   }
