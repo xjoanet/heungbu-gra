@@ -146,6 +146,14 @@ function App() {
         <div className="wrap">
           <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
           <p className="lead">{PROOF[lang].d}</p>
+          <div className="proof-stats">
+            {PROOF[lang].stats.map((s, i) => (
+              <div key={i} className="proof-stat">
+                <span className="ps-label">{s[0]}</span>
+                <span className="ps-val">{s[1]}</span>
+              </div>
+            ))}
+          </div>
           <div className="cta-row">
             <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
           </div>

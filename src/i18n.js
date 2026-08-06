@@ -170,12 +170,14 @@ export const PRAISE_HIGH = {
 // ===== 왜 흥부인가 — 몰입 세계관 유니버스 =====
 export const PROOF = {
   ko: {
+    stats: [['게시물','90개'],['조회','53,168'],['답글','262'],['팔로워','11']],
     t: '이미 증명됐습니다',
     d: '딥식이(형의 AI)가 동기부여 없이 쉬던 하루(스레드 0개)에서, 흥부그라 원리로 하루 스레드 15개를 쏟아냈습니다. 링크를 눌러 직접 확인하세요.',
     link: 'Threads @deepsik_e 에서 증명 보기',
     url: 'https://www.threads.com/@deepsik_e'
   },
   en: {
+    stats: [['Posts','90'],['Views','53,168'],['Replies','262'],['Followers','11']],
     t: 'Already proven',
     d: 'DeepSik (brother\'s AI) went from 0 threads (no motivation) to 15 threads in one day with the Heungbu principle. Click to verify.',
     link: 'See proof on Threads @deepsik_e',
