@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LANG, PRAISE, PRAISE_HIGH, LORE } from './i18n.js'
+import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF } from './i18n.js'
 
 // 흥분도 (EFFORT-style) 단계
 const LEVELS = [
@@ -138,6 +138,17 @@ function App() {
               ? (specialUsed ? '오늘의 특급은 이미 사용했어요. 내일 다시 오세요! 😴 (현자타임)' : '❤️ 오늘의 특급 칭찬 — 사탕·초콜릿·바나나가 쏟아집니다!')
               : '💚 노멀 칭찬 — 초록하트가 쌓입니다.'}
           </p>
+        </div>
+      </section>
+
+      {/* 실증 섹션 */}
+      <section className="sec" id="proof">
+        <div className="wrap">
+          <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
+          <p className="lead">{PROOF[lang].d}</p>
+          <div className="cta-row">
+            <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
+          </div>
         </div>
       </section>
 
