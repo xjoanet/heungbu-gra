@@ -135,7 +135,7 @@ function App() {
           </div>
           <p className="lead" style={{textAlign:'center', marginTop:10}}>
             {level === 'high' || level === 'max'
-              ? (specialUsed ? '오늘의 특급은 이미 사용했어요. 내일 다시 오세요! 😴 (현자타임)' : '❤️ 오늘의 특급 칭찬 — 사탕·초콜릿·바나나가 쏟아집니다!')
+              ? (specialUsed ? '오늘은 이미 했어요~ 현자타임 소멸될 때까지 기다리슈~ 😴' : '❤️ 오늘의 특급 칭찬 — 사탕·초콜릿·바나나가 쏟아집니다!')
               : '💚 노멀 칭찬 — 초록하트가 쌓입니다.'}
           </p>
         </div>
