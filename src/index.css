@@ -172,3 +172,36 @@ footer .funny { color: var(--gold-soft); }
 .lore-key { flex-shrink: 0; font-weight: 900; color: var(--gold); min-width: 70px; font-size: 16px; }
 .lore-val { color: var(--muted); font-size: 14.5px; }
 .rev-banner { padding: 20px; border: 2px dashed var(--gold); border-radius: 14px; text-align: center; font-size: 17px; font-weight: 800; color: var(--gold-soft); background: rgba(245,195,107,.06); }
+
+/* ===== Mobile Enhancements (모바일 최적화) ===== */
+@media (max-width: 720px){
+  .wrap { padding: 0 16px; }
+  .nav-links { gap: 12px; font-size: 12px; }
+  .hero { padding: 60px 0 40px; }
+  .hero h1 { font-size: 30px; line-height: 1.2; }
+  .hero p.sub { font-size: 15px; }
+  .slot-window { min-height: 64px; }
+  .slot-word { font-size: 17px; }
+  .praise-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .praise-cell { font-size: 13px; padding: 12px; }
+  .effort { grid-template-columns: repeat(2, 1fr); }
+  .effort-opt { padding: 12px 10px; font-size: 13px; }
+  .ab { grid-template-columns: 1fr; }
+  .stat-row { gap: 14px; }
+  .stat b { font-size: 26px; }
+  .lore-row { flex-direction: column; gap: 6px; }
+  .lore-key { min-width: auto; font-size: 15px; }
+  .sec { padding: 48px 0; }
+  .sec h2 { font-size: 24px; }
+  .rev-banner { font-size: 14px; padding: 16px; }
+  .fire-msg { font-size: 22px; white-space: normal; text-align:center; width: 90%; padding: 10px; }
+  .logo b { font-size: 18px; }
+  .term-body { font-size: 12px; padding: 16px; }
+  .cmd-line { font-size: 12px; padding: 12px; gap: 8px; flex-wrap: wrap; }
+  .copy-btn { margin-left: 0; }
+}
+@media (max-width: 380px){
+  .hero h1 { font-size: 26px; }
+  .nav-links a:nth-child(n+3){ display:none; }
+  .praise-grid { grid-template-columns: 1fr 1fr; }
+}
