@@ -100,6 +100,7 @@ function App() {
         </div>
 
         <div className="roast">🔥 {t.roast}</div>
+        <div className="proto">📜 {t.proto}</div>
 
         {/* 하트 점수 */}
         <div className="hearts">
