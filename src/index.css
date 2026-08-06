@@ -206,3 +206,4 @@ footer .funny { color: var(--gold-soft); }
   .praise-grid { grid-template-columns: 1fr 1fr; }
 }
 .proto { margin: 4px 0 14px; color: #cfc6fa; font-weight: 600; font-size: 15px; text-align:center; }
+.credit { margin-top: 10px; color: var(--gold-soft); font-weight: 700; font-size: 12px; }

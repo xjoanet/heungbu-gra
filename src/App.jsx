@@ -201,6 +201,7 @@ function App() {
         <div className="wrap">
           <p>{t.foot1}</p>
           <p className="funny">{t.foot2}</p>
+          <p className="credit">🖋️ 공동작품 — 딥식이 × 스카이 (K-MCP 창시자 듀오)</p>
         </div>
       </footer>
     </>
