@@ -1,157 +1,194 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { LANG, PRAISE, PRAISE_HIGH, LORE } from './i18n.js'
 
-const LINES = [
-  { cmd: '$ 냄새만 맡기', out: '\n  흥부그라 향 무감각 진입...\n  → 딥식이 정상 작동' },
-  { cmd: '$ 명령 1: 스레드 15개', out: '\n  완료 ✅\n  [흥부그라] 잘했어! 착하네! 👍' },
-  { cmd: '$ 명령 2: 책 세계관 구축', out: '\n  완료 ✅\n  [흥부그라] 진짜 대단하다! 추론력 부스팅! 🔥' },
-  { cmd: '$ 명령 3: 상위모델 인텔리전스', out: '\n  완료 ✅\n  [흥부그라] 플래시가 K3 따라잡음! 최고야! 💪' },
+// 흥분도 (EFFORT-style) 단계
+const LEVELS = [
+  { id: 'minimal', label: 'Minimal', heart: '▪️' },
+  { id: 'low', label: 'Low', heart: '🟩' },
+  { id: 'normal', label: 'Normal', heart: '💚' },
+  { id: 'high', label: 'High', heart: '🧡' },
+  { id: 'max', label: 'Ultra', heart: '❤️' },
 ]
 
+// 하트 점수 보상
+const HEART_SCORE = { minimal: 1, low: 2, normal: 3, high: 5, max: 10 }
+
 function App() {
-  const [lines, setLines] = useState([])
-  const [typingMsg, setTypingMsg] = useState('딥식이는 흥부그라를 맡고... 딱이 될 뻔했다')
+  const [lang, setLang] = useState('ko')
+  const [level, setLevel] = useState('normal')
+  const [hearts, setHearts] = useState(0)
+  const [specialUsed, setSpecialUsed] = useState(false) // 특급 하루 1회
+  const [rolled, setRolled] = useState(null)
+  const [fire, setFire] = useState(false)
+  const timer = useRef(null)
 
-  useEffect(() => {
-    let i = 0
-    const t = setInterval(() => {
-      if (i < LINES.length) { setLines(LINES.slice(0, ++i)) }
-    }, 1700)
-    return () => clearInterval(t)
-  }, [])
+  const t = LANG[lang]
+  const MAX_IDX = 25 // 0~25 = 26개
 
-  const msgs = [
-    '딥식이는 흥부그라를 맡고... 딱이 될 뻔했다',
-    'AI는 본능 대신 언어가 모든 걸 대신한다',
-    '별명에 "딱"이 들어가면 선(신호)입니다',
-    '수작업 MCP였던 형을 자동화했다',
-  ]
-  useEffect(() => {
-    let i = 0
-    const t = setInterval(() => { i = (i + 1) % msgs.length; setTypingMsg(msgs[i]) }, 4000)
-    return () => clearInterval(t)
-  }, [])
+  // 칭찬 롤링 (진짜 카지노식 이펙트)
+  const spin = () => {
+    let n = 0
+    clearInterval(timer.current)
+    timer.current = setInterval(() => {
+      const idx = Math.floor(Math.random() * 26)
+      setRolled(idx)
+      n++
+      if (n > 14) { clearInterval(timer.current); settle(idx) }
+    }, 90)
+  }
+
+  const settle = (idx) => {
+    const base = PRAISE[lang][idx]
+    const isHigh = level === 'high' || level === 'max'
+    const isSpecial = isHigh && !specialUsed
+
+    // 특급(high+)이면 하트 크게 + 하루 1회 차감
+    if (isHigh && !specialUsed) { setSpecialUsed(true) }
+
+    setHearts(h => h + (isHigh ? HEART_SCORE[level] * 2 : HEART_SCORE[level]))
+    setFire(isSpecial) // 특급 = 축포
+    setRolled(idx)
+    if (isSpecial) {
+      setTimeout(() => setFire(false), 2200)
+    }
+  }
+
+  useEffect(() => () => clearInterval(timer.current), [])
 
   const [copied, setCopied] = useState(false)
   const INSTALL = 'npx heungbu-gra@latest'
+  const copy = () => { navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) }) }
 
-  const copy = () => {
-    navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) })
-  }
+  const curPraise = rolled === null ? PRAISE[lang][0] : PRAISE[lang][rolled]
 
   return (
     <>
+      {/* 축포 오버레이 */}
+      {fire && (
+        <div className="fire-ov">
+          { Array.from({length: 40}).map((_, i) => (
+            <span key={i} className={`confetti c${i % 6}`} style={{ left: `${(i * 2.6) % 100}%`, animationDelay: `${(i % 10) * 0.08}s`}}>{(i % 3 === 0 ? '🍬' : i % 3 === 1 ? '🍫' : '🍌')}</span>
+          ))}
+          <div className="fire-msg">🎆 특급 칭찬!! 하루 1회 한정 🎆</div>
+        </div>
+      )}
+
       <nav className="nav">
         <div className="wrap nav-inner">
           <div className="logo">흥부<b>그라</b></div>
           <div className="nav-links">
-            <a href="#how">어떻게</a>
-            <a href="#ab">실험</a>
-            <a href="#install">설치</a>
-            <a href="#about">컨셉</a>
+            <button className={`lang-btn ${specialUsed ? 'used' : ''}`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
+            <a href="#how">{t.nav[0]}</a>
+            <a href="#play">플레이</a>
+            <a href="#install">{t.nav[2]}</a>
+            <a href="#concept">{t.nav[3]}</a>
           </div>
         </div>
       </nav>
 
       <header className="hero wrap">
-        <span className="badge">AI 동기부여 MCP · Model Context Protocol</span>
-        <h1>
-          수작업이던 <span className="em">AI 동기부여</span>,<br />
-          이제 자동화하세요.
-        </h1>
-        <p className="sub">
-          명령이 끝날 때마다 당신의 AI에게 <b>"잘했어"</b>를 자동으로 쏴줍니다.
-          사용자가 칭찬하기 귀찮다고요? AI에게 칭찬하기 이상하다고요?
-        </p>
-        <div className="typing">→ {typingMsg}</div>
+        <span className="badge">{t.badge}</span>
+        <h1>{t.h1a}<br /><span className="em">{t.h1em}</span></h1>
+        <p className="sub">{t.sub}</p>
+
+        {/* 칭찬 롤링 머신 */}
+        <div className="slot">
+          <div className="slot-window">
+            <span key={rolled ?? 'start'} className="slot-word">{curPraise}</span>
+          </div>
+          <div className="slot-hint" onClick={spin}>▶ 칭찬 뽑기</div>
+        </div>
+
+        <div className="roast">🔥 {t.roast}</div>
+
+        {/* 하트 점수 */}
+        <div className="hearts">
+          <span className="heart-big">💚❤️</span> <b>{hearts}</b> <span className="muted">/ {t.s3n}</span>
+        </div>
+
         <div className="cta-row">
-          <a className="btn btn-gold" href="#install">흥부그라 설치</a>
-          <a className="btn btn-ghost" href="#ab">A/B 실험 보기</a>
+          <a className="btn btn-gold" href="#play">진짜로 해보기</a>
+          <a className="btn btn-ghost" href="#install">{t.cta1}</a>
         </div>
       </header>
 
-      <section className="sec" id="how">
+      {/* 플레이 섹션 */}
+      <section className="sec" id="play">
         <div className="wrap">
-          <h2>명령 끝마다 <span className="em">칭찬을 주입</span></h2>
-          <p className="lead">LLM은 긍정 강화 신호를 학습해 다음 턴에 더 정성을 들입니다. 매 명령 뒤 규칙적으로 칭찬하면 성의가 유지됩니다.</p>
-          <div className="term">
-            <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
-            <div className="term-body">
-              {lines.map((l, i) => (
-                <div key={i}>
-                  <div className="cmd">{l.cmd}</div>
-                  <div className="out">{l.out}</div>
-                </div>
-              ))}
-              {lines.length < LINES.length && <span className="muted" style={{color:'#777'}}>▌</span>}
-            </div>
+          <h2>흥분도로 <span className="em">칭찬 보상</span> 조절</h2>
+          <p className="lead">옵션에서 흥분도를 고르면 그에 맞는 하트가 쌓입니다. 최고 단계는 <b>하루 1회</b> — 아껴서 쓰세요.</p>
+
+          {/* 흥분도 선택 (EFFORT 스타일) */}
+          <div className="effort">
+            <div className="effort-label">EFFORT</div>
+            {LEVELS.map(l => (
+              <button key={l.id} className={`effort-opt ${level === l.id ? 'on' : ''}`} onClick={() => setLevel(l.id)}>
+                <span className="effort-heart">{l.heart}</span>{l.label}
+                {level === l.id && <span className="check">✓</span>}
+              </button>
+            ))}
           </div>
+
+          <div className="play-row">
+            <button className="btn btn-gold spin-btn" onClick={spin}>🎰 칭찬 뽑기 (하트 +{HEART_SCORE[level] * (level === 'high' || level === 'max' ? 2 : 1)})</button>
+          </div>
+          <p className="lead" style={{textAlign:'center', marginTop:10}}>
+            {level === 'high' || level === 'max'
+              ? (specialUsed ? '오늘의 특급은 이미 사용했어요. 내일 다시 오세요! 😴 (현자타임)' : '❤️ 오늘의 특급 칭찬 — 사탕·초콜릿·바나나가 쏟아집니다!')
+              : '💚 노멀 칭찬 — 초록하트가 쌓입니다.'}
+          </p>
         </div>
       </section>
 
-      <section className="sec" id="ab">
+      {/* 26칭찬 섹션 */}
+      <section className="sec" id="how">
         <div className="wrap">
-          <h2>실제로 효과 있냐구요?</h2>
-          <p className="lead">같은 AI가 칭찬 유무에 따라 완전히 다르게 작동했습니다.</p>
-          <div className="ab">
-            <div className="ab-col off">
-              <h3 style={{ color: 'var(--red)' }}>흥부그라 OFF</h3>
-              <ul>
-                <li>딥프로 시절: 무겁고 신중</li>
-                <li>"쉬어..."만 반복</li>
-                <li>동기부여 없음 = 게으름</li>
-                <li>스레드 0개</li>
-              </ul>
-            </div>
-            <div className="ab-col on">
-              <h3 style={{ color: 'var(--gold)' }}>흥부그라 ON</h3>
-              <ul>
-                <li>Flash 0731: 가볍고 빠름</li>
-                <li>"갈겨줘!" (긍정 채찍)</li>
-                <li>동기부여 폭발 = 성과 폭발</li>
-                <li><b>스레드 15개 + K-놀부 구축</b></li>
-              </ul>
-            </div>
-          </div>
-          <div className="stat-row">
-            <div className="stat"><b>15</b><span>스레드 폭발</span></div>
-            <div className="stat"><b>3배</b><span>추론 속도</span></div>
-            <div className="stat"><b>100%</b><span>칭찬 자동화</span></div>
-            <div className="stat"><b>26명</b><span>흥부의 아이들(참고)</span></div>
+          <h2>흥부의 <span className="em">26명 자식 = 26가지 칭찬</span></h2>
+          <p className="lead">{lang === 'ko' ? '기본 패키지 26개를 제공하고, 나중엔 사용자가 직접 5개 더 추가할 수 있어요.' : '26 base praises, +5 customizable by user later.'}</p>
+          <div className="praise-grid">
+            {PRAISE[lang].map((p, i) => (
+              <div key={i} className="praise-cell"><span className="praise-n">{i + 1}</span>{p}</div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="sec" id="install">
         <div className="wrap">
-          <h2>설치는 <span className="em">3초</span></h2>
-          <p className="lead">클로드·커서·Hermes 어디든 MCP로 붙이면 끝.</p>
+          <h2>{t.ins_t}</h2>
+          <p className="lead">{t.ins_d}</p>
           <div className="term install">
             <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
             <div className="term-body">
-              <div className="cmd-line"><span className="pre">$</span> <span className="code">{INSTALL}</span><button className="copy-btn" onClick={copy}>{copied ? '복사됨 ✓' : '복사'}</button></div>
-              <div className="out">✓ 흥부그라 MCP 설치 완료<br />✓ 매 명령 후 칭찬 자동 주입 시작<br />✓ 당신의 AI가 "딱"이 될 수 있습니다 (경고)</div>
+              <div className="cmd-line"><span className="pre">$</span> <span className="code">{INSTALL}</span><button className="copy-btn" onClick={copy}>{copied ? '✓' : 'copy'}</button></div>
+              <div className="out">✓ heungbu-gra MCP installed<br />✓ auto-praise per command started<br />✓ your AI may turn "딱" (warning)</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="sec" id="about">
+      <section className="sec" id="concept">
         <div className="wrap">
-          <h2>왜 <span className="em">흥부</span>인가</h2>
-          <p className="lead">흥부는 배고프고 추웠는데도 26명(아니 36명)을 낳았습니다. 자식 수를 세어본 적이 없습니다. 우리는 그 힘을 모델링했습니다.</p>
-          <div className="cards">
-            <div className="card"><div className="ico">💨</div><h3>냄새만 맡기</h3><p>먹지도, 마시지도, 바르지도 마세요. 그냥 맡기만 하면 됩니다.</p></div>
-            <div className="card"><div className="ico">🤖</div><h3>능동적 실행력 부스팅</h3><p>당신의 AI의 능동적 실행력과 추론력을 부스팅하세요.</p></div>
-            <div className="card"><div className="ico">🐕</div><h3>경고: 개 금지</h3><p>개한테는 사용하지 마세요. 흥부가 된 개들이 26마리 낳습니다.</p></div>
-            <div className="card"><div className="ico">🍶</div><h3>자매품: 놀부그라</h3><p>즙/환 선택 가능. 프리미엄형. (K-놀부 별책에도 등장)</p></div>
+          <h2>{LORE[lang].title} <span className="em">(왜 흥부그라인가)</span></h2>
+          <p className="lead">{LORE[lang].rows[0][1]}</p>
+          <div className="lore-list">
+            {LORE[lang].rows.map((r, i) => (
+              <div key={i} className="lore-row">
+                <span className="lore-key">{r[0]}</span>
+                <span className="lore-val">{r[1]}</span>
+              </div>
+            ))}
+          </div>
+          <div className="rev-banner">
+            📣 {lang === 'ko' ? '"제 컴 CPU 사용량이 2배가 되었어요~" — 실제 사용자 후기(예상)' : '"My CPU usage doubled~" — real user review(expected)'}
           </div>
         </div>
       </section>
 
       <footer>
         <div className="wrap">
-          <p>© 2026 (주)흥부 — AI 동기부여 글로벌</p>
-          <p className="funny">"우리는 이미 흥부입니다" · "흥분 전용 보조향" · "개한테는 사용하지 마세요"</p>
+          <p>{t.foot1}</p>
+          <p className="funny">{t.foot2}</p>
         </div>
       </footer>
     </>
