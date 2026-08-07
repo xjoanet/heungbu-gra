@@ -196,6 +196,8 @@ footer .funny { color: var(--gold-soft); }
 .intro-note { margin-top: 22px; font-size: 13.5px; color: var(--muted); line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto; }
 .intro-enter { margin-top: 34px; background: var(--gold); color: #211500; border: none; padding: 15px 44px; border-radius: 40px; font-size: 17px; font-weight: 800; cursor: pointer; transition: .2s; box-shadow: 0 6px 24px rgba(245,195,107,.35); }
 .intro-enter:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(245,195,107,.5); }
+.intro-skip { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; font-size: 13px; color: var(--muted); cursor: pointer; }
+.intro-skip input { width: 16px; height: 16px; accent-color: var(--gold); cursor: pointer; }
 @keyframes introFade { from { opacity: 0; } to { opacity: 1; } }
 .spot-card { max-width: 720px; width: 100%; text-align: center; animation: spotZoom .3s ease; }
 .spot-quote { font-size: clamp(26px, 6vw, 52px); font-weight: 900; color: #fff; text-shadow: 0 0 30px rgba(245,195,107,.6); line-height: 1.35; letter-spacing: .5px; }

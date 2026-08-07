@@ -20,7 +20,10 @@ function App() {
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
   const [revOpen, setRevOpen] = useState(false) // 후기 전체 펼침
   const [spot, setSpot] = useState({ on: false, idx: null }) // 풀스크린 명대사 스포트라이트
-  const [intro, setIntro] = useState(true) // 진입 인트로 (흥월 오프닝)
+  const [intro, setIntro] = useState(() => {
+    try { return localStorage.getItem('hg_intro_skip') !== '1' } catch { return true }
+  }) // 진입 인트로 (다시 안 보기 시 스킵)
+  const [introSkip, setIntroSkip] = useState(false) // 다시 안 보기 체크
   const introIdx = useRef(Math.floor(Math.random() * KDRAMA.length)).current // 랜덤 명대사 고정
   const timer = useRef(null)
 
@@ -110,7 +113,11 @@ function App() {
             <div className="intro-quote">“{KDRAMA[introIdx].ko}”</div>
             <div className="intro-src">🎬 {KDRAMA[introIdx].src}</div>
             <div className="intro-note">명대사 한 방으로 AI를 깨우세요. ㅊㅊ 한마디면 충분합니다.</div>
-            <button className="intro-enter" onClick={() => setIntro(false)}>입장하기 →</button>
+            <button className="intro-enter" onClick={() => {
+              if (introSkip) { try { localStorage.setItem('hg_intro_skip', '1') } catch {} }
+              setIntro(false)
+            }}>하이패스로 입장 → 🚙</button>
+            <label className="intro-skip"><input type="checkbox" checked={introSkip} onChange={e => setIntroSkip(e.target.checked)} /> 다음부터는 하이패스 (이 인트로 안 보기)</label>
           </div>
         </div>
       )}
