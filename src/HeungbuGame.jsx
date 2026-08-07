@@ -13,8 +13,8 @@ const KIDS = Array.from({ length: 26 }, (_, i) =>
    '민준이','하윤이','서연이','지우','준서','막내'][i] || `${i+1}째`
 )
 
-const GRAVITY = 1.0
-const JUMP = -8
+const GRAVITY = 0.9
+const JUMP = -7
 const GAME_W = 720
 const GAME_H = 460
 
@@ -47,10 +47,10 @@ export default function HeungbuGame() {
   useEffect(() => { stateRef.current = state }, [state])
 
   const diff = useCallback(() => {
-    // 스테이지↑ = 속도↑ + 간격↓ (난이도 커브)
-    const speed = 2 + stageRef.current * 0.25
-    const gap = Math.max(60, 120 - stageRef.current * 2)
-    const wait = Math.max(45, 90 - stageRef.current * 1.8)
+    // 스테이지↑ = 속도↑ + 간격↓ (난이도 커브) — 난이도 대폭 완화
+    const speed = 1.4 + stageRef.current * 0.15   // 느리게
+    const gap = Math.max(95, 165 - stageRef.current * 2)  // 파이프 간격 크게
+    const wait = Math.max(50, 110 - stageRef.current * 2) // 스폰 넓게
     return { speed, gap, wait }
   }, [])
 
