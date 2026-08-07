@@ -13,8 +13,8 @@ const KIDS = Array.from({ length: 26 }, (_, i) =>
    '민준이','하윤이','서연이','지우','준서','막내'][i] || `${i+1}째`
 )
 
-const GRAVITY = 0.8
-const JUMP = -13
+const GRAVITY = 0.55
+const JUMP = -11
 const GAME_W = 720
 const GAME_H = 460
 
@@ -62,6 +62,10 @@ export default function HeungbuGame() {
   }, [])
 
   const jump = useCallback(() => {
+    if (state === 'countdown') {
+      // 카운트다운 중 클릭: 원하면 즉시 점프(가속)에 반영 — 안전하게 무시
+      return
+    }
     if (playingRef.current) {
       velRef.current = JUMP
     } else if (state === 'ready') {
@@ -89,12 +93,13 @@ export default function HeungbuGame() {
           attemptsRef.current += 1
           localStorage.setItem('hb_attempts', String(attemptsRef.current))
           setAttempts(attemptsRef.current)
-          setTimeout(() => setState('playing'), 200)
+          playingRef.current = true
+          setState('playing')
           return 0
         }
         return c - 1
       })
-    }, 700)
+    }, 800)
     return () => clearInterval(iv)
   }, [state])
 
@@ -176,6 +181,9 @@ export default function HeungbuGame() {
     }
   }, [state, jump])
 
+  // 게임 종료 화면들용 — 버튼 클릭이 부모(점프)로 버블링되지 않게
+  const stop = e => e.stopPropagation()
+
   const restart = () => { reset(); setState('ready') }
 
   const label = state === 'win' ? '전원 생존!' :
@@ -247,7 +255,7 @@ export default function HeungbuGame() {
           <div style={{fontSize:26}}>😭💦</div>
           <div style={{fontWeight:700, margin:'6px 0'}}>그만! 아이가 울어버렸어!</div>
           <div style={{fontSize:12, opacity:.8, marginBottom:12}}>스테이지 {stage}/26 · 목표 {stage}까지</div>
-          <button onClick={restart} style={{padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시 처음부터</button>
+          <button onPointerDown={stop} onClick={restart} style={{padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시 처음부터</button>
         </div>
       )}
 
@@ -264,7 +272,7 @@ export default function HeungbuGame() {
           )}
           <div style={{fontSize:15, fontWeight:700, marginTop:8, color:'#fff'}}>당신은 이제 <span style={{color:'#ffd27a'}}>흥부의 경지</span>에 이르렀습니다.</div>
           <div style={{fontSize:12, marginTop:6, color:'#ffd27a'}}>+5 커스텀 칭찬 슬롯 잠금 해제!! · 시도 {attempts}번째</div>
-          <button onClick={restart} style={{marginTop:14,padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시하기</button>
+          <button onPointerDown={stop} onClick={restart} style={{marginTop:14,padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시하기</button>
         </div>
       )}
     </div>
