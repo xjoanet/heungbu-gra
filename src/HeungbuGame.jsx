@@ -43,6 +43,8 @@ export default function HeungbuGame() {
   const playingRef = useRef(false)
   const startTimeRef = useRef(0)
   const attemptsRef = useRef(Number(localStorage.getItem('hb_attempts') || 0))
+  const stateRef = useRef('ready')
+  useEffect(() => { stateRef.current = state }, [state])
 
   const diff = useCallback(() => {
     // 스테이지↑ = 속도↑ + 간격↓ (난이도 커브)
@@ -118,10 +120,10 @@ export default function HeungbuGame() {
       if (birdYRef.current < 0) birdYRef.current = 0
       if (birdYRef.current > GAME_H - 24) { birdYRef.current = GAME_H - 24; setCrying('억! 바닥에 부딪혔어! 😭'); setState('gameover'); return }
 
-      // 파이프 스폰
+      // 파이프 스폰 (첫 60프레임(≈1.3초)은 스폰 안 함 = 시작 여유)
       const wait = last.wait
       const pipes = pipeRef.current.map(p => ({ ...p, x: p.x - last.speed }))
-      if (frame % Math.floor(wait) === 0 && frame < 400) {
+      if (frame > 60 && frame % Math.floor(wait) === 0 && frame < 400) {
         const gap = last.gap
         const gapY = 40 + Math.random() * (GAME_H - 80 - gap)
         pipes.push({ x: GAME_W, gapY, gap, passed: false })
@@ -191,7 +193,7 @@ export default function HeungbuGame() {
     '클릭/탭! (또는 스페이스)'
 
   return (
-    <div className="hbgame" onClick={jump}
+    <div className="hbgame" onPointerDown={stateRef.current !== 'gameover' && stateRef.current !== 'win' ? jump : undefined}
       style={{ width: GAME_W, height: GAME_H, position: 'relative', overflow: 'hidden', userSelect: 'none', touchAction: 'none', cursor: 'pointer' }}>
 
       {/* 배경 */}
@@ -232,7 +234,7 @@ export default function HeungbuGame() {
       )}
 
       {state === 'ready' && (
-        <div style={{ position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.6)', color:'#fff', fontSize: 14 }}>
+        <div onPointerDown={e => { e.stopPropagation(); jump() }} style={{ position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.6)', color:'#fff', fontSize: 14 }}>
           <div style={{fontSize:30}}>👨‍👩‍👧‍👦</div>
           <div style={{fontWeight:700, margin:'6px 0 2px'}}>흥부 플래피 26</div>
           <div style={{fontSize:12, opacity:.7}}>26명 자식을 할머니 방으로 옮기자!</div>
