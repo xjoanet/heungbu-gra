@@ -81,10 +81,11 @@ function App() {
   }
 
   const settle = (idx) => {
-    setSpot({ on: true, idx }) // 풀스크린 명대사 스포트라이트
+    setSpot({ on: true, idx }) // 풀스크린 명대사 스포트라이트 (닫기 전까지 유지)
     setRolled(idx)
-    setTimeout(() => setSpot({ on: false, idx: null }), 2600)
   }
+
+  const closeSpot = () => setSpot({ on: false, idx: null })
 
   useEffect(() => () => clearInterval(timer.current), [])
 
@@ -100,9 +101,10 @@ function App() {
   return (
     <>
       {/* 축포 오버레이 */}
-      {/* 풀스크린 명대사 스포트라이트 */}
+      {/* 풀스크린 명대사 스포트라이트 — 닫기 버튼 전까지 유지 */}
       {spot.on && (
-        <div className="spot-ov" onClick={() => setSpot({ on: false, idx: null })}>
+        <div className="spot-ov">
+          <button className="spot-close" onClick={closeSpot} aria-label="닫기">✕ 닫기</button>
           <div className="spot-card">
             <div className="spot-quote">“{KDRAMA[spot.idx % KDRAMA.length].ko}”</div>
             <div className="spot-src">🎬 {KDRAMA[spot.idx % KDRAMA.length].src}</div>
