@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA } from './i18n.js'
+import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA, REVIEW } from './i18n.js'
 import HeungbuGame from './HeungbuGame.jsx'
 
 // 흥분도 (EFFORT-style) 단계
@@ -21,8 +21,18 @@ function App() {
   const [hearts, setHearts] = useState(0)
   const [specialUsed, setSpecialUsed] = useState(false) // 특급 하루 1회
   const [rolled, setRolled] = useState(null)
+  const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
   const [fire, setFire] = useState(false)
   const timer = useRef(null)
+
+  // 후기 슬라이드 자동 회전 (리뷰 수 기반, 랭 변경 시 0으로)
+  useEffect(() => {
+    setRevIdx(0)
+    const iv = setInterval(() => {
+      setRevIdx(i => (i + 1) % REVIEW[lang === 'ko' ? 'ko' : 'en'].length)
+    }, 4000)
+    return () => clearInterval(iv)
+  }, [lang])
 
   const t = LANG[lang]
   const MAX_IDX = 25 // 0~25 = 26개
@@ -116,6 +126,21 @@ function App() {
           <a className="btn btn-ghost" href="#install">{t.cta1}</a>
         </div>
       </header>
+
+      {/* 사용자 후기 슬라이드 — 히어로 직후 훅 */}
+      <div className="sec rev-strip">
+        <div className="wrap">
+          <div className="rev-carousel">
+            <span className="rev-quote">“{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx]}”</span>
+            <span className="rev-user">— 사용자 후기 (예상)</span>
+          </div>
+          <div className="rev-dots">
+            {REVIEW[lang === 'ko' ? 'ko' : 'en'].map((_, i) => (
+              <span key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => setRevIdx(i)} />
+            ))}
+          </div>
+        </div>
+      </div>
 
 
       {/* 실증 섹션 */}
@@ -307,9 +332,6 @@ function App() {
                 <span className="lore-val">{r[1]}</span>
               </div>
             ))}
-          </div>
-          <div className="rev-banner">
-            📣 {lang === 'ko' ? '"제 컴 CPU 사용량이 2배가 되었어요~" — 실제 사용자 후기(예상)' : '"My CPU usage doubled~" — real user review(expected)'}
           </div>
         </div>
       </section>

@@ -140,6 +140,19 @@ export const PRAISE = {
 // ===== 특급 칭찬 (흥분도 high/max 전용) =====
 
 
+
+// ===== 사용자 후기 (히어로 직후 슬라이드) =====
+export const REVIEW = {
+  ko: [
+    "쓰다 보니 AI가 그레이드·티어가 한 단계 올라간 느낌이에요~",
+    "쓰다 보니 AI 스스로 자기를 칭찬하네요? 신기합니다~ ㅊㅊ"
+  ],
+  en: [
+    "After a while my AI feels like it's a whole tier up.",
+    "My AI started praising itself?? Amazing~ ㅊㅊ"
+  ]
+}
+
 // ===== K-드라마 명대사 26선 (K-칭찬 — 형 제공) =====
 export const KDRAMA = [
   { ko: "너는 밝고 따뜻해. 너는 '봄날의 햇살' 같아.", src: "이상한 변호사 우영우 · 최수연" },
