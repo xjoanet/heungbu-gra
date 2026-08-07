@@ -221,3 +221,7 @@ footer .funny { color: var(--gold-soft); }
 .cc-term .out { color: var(--gold-soft); }
 .cc-easy { color: var(--muted); font-size: 14px; margin-bottom: 14px; line-height: 1.6; }
 .cc-term .cmd-line .code { color: var(--gold); font-size: 14px; word-break: break-word; line-height: 1.7; }
+.game-host { display: flex; justify-content: center; margin: 10px 0 6px; }
+.game-host .hbgame { border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 400px; width: 100%; }
+@media (max-width: 460px){ .game-host .hbgame { height: 230px !important; } }
+@keyframes hbpop { 0%{transform:scale(0.3);opacity:0} 60%{transform:scale(1.2)} 100%{transform:scale(1);opacity:1} }

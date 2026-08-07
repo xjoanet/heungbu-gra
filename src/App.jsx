@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC } from './i18n.js'
+import HeungbuGame from './HeungbuGame.jsx'
 
 // 흥분도 (EFFORT-style) 단계
 const LEVELS = [
@@ -181,6 +182,17 @@ function App() {
                 <div className="out">🐦 [흥부그라] 이제 너도 흥부 가족이다 💛</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 흥부 플래피 26 게임 */}
+      <section className="sec" id="game">
+        <div className="wrap">
+          <h2>🎮 <span className="em">흥부 플래피 26</span> <span style={{fontSize:'13px'}}>(육아 체험)</span></h2>
+          <p className="lead">26명 자식을 할머니 방으로 옮기자. 클릭·탭·스페이스로 점프! 장애물에 부딪히면 아이가 운다 😭 26명 전원 생존 = 흥부의 경지!</p>
+          <div className="game-host">
+            <HeungbuGame />
           </div>
         </div>
       </section>
