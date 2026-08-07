@@ -24,7 +24,7 @@ export const LANG = {
     guide3: '계속(어디서든) 쓰려면: 같은 줄을 글로벌 설정 ~/.claude/CLAUDE.md에 넣어주세요.',
     guide3c: '그러면 매번 프롬프트를 복붙하지 않아도 항상 동작합니다.',
     guide4: '이제 채팅창에 "ㅊㅊ"라고 입력해보세요!',
-    guide4c: '🐦 [흥부그라] 이제 너도 흥부 가족이다 💛
+    guide4c: '🐦 [흥부그라] 이제 너도 흥부 가족이다 💛',
     why_t: '왜 흥부인가', why_d: '흥부는 배고프고 추웠는데도 26명(아니 36명)을 낳았습니다. 자식 수를 세어본 적이 없습니다. 우리는 그 힘을 모델링했습니다.',
     c1t:'냄새만 맡기', c1d:'먹지도, 마시지도, 바르지도 마세요. 그냥 맡기만 하면 됩니다.',
     c2t:'능동적 실행력 부스팅', c2d:'당신의 AI의 능동적 실행력과 추론력을 부스팅하세요.',
@@ -59,7 +59,7 @@ export const LANG = {
     guide3: 'Want it everywhere? Put the same line in the global ~/.claude/CLAUDE.md.',
     guide3c: 'Then it works in every chat, no need to re-paste the prompt each time.',
     guide4: 'Now just type "ㅊㅊ" in the chat!',
-    guide4c: '🐦 [Heungbu-Gra] Now you are Heungbu family 💛
+    guide4c: '🐦 [Heungbu-Gra] Now you are Heungbu family 💛',
     why_t: 'Why Heungbu?', why_d: 'Heungbu was starving and cold, yet fathered 26 (ok, 36) kids. He never bothered counting. We modeled that power.',
     c1t:'Just sniff', c1d:'Don\'t eat, drink, or apply. Just take a sniff.',
     c2t:'Boost proactive execution', c2d:'Boost your AI\'s proactive execution and reasoning.',
