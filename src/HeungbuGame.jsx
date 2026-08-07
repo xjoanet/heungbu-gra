@@ -47,12 +47,13 @@ export default function HeungbuGame({ lang = 'ko' }) {
   useEffect(() => { stateRef.current = state }, [state])
 
   const diff = useCallback(() => {
-    // 스테이지↑ = 속도↑ + 간격↓ (난이도 커브)
-    // 목표: 첫 트라이 클리어 금지, 일반 5~10트라이, 전문가 2~4트라이
-    // 속도 2배 + 후반부 과속 클램프 + 장애물 살짝 어렵게
-    const speed = Math.min(6, 2.8 + stageRef.current * 0.3)   // 첫판 3.1 = 2배, 최대 6 클램프
-    const gap = Math.max(90, Math.min(138, 165 - (stageRef.current-1) * 2))   // 간격
-    const wait = Math.max(44, 100 - stageRef.current * 1.7)     // 스폰
+    const st = stageRef.current
+    // 부드러운 2차 가속 커브: 초반 살짝 → 후반으로 갈수록 가속도 붙어 긴장감 고조
+    // 갑자기 빨라지지 않고 "슬슬슬" 계속 가속되는 느낌
+    const t = (st - 1) / 25              // 0~1
+    const speed = 2.6 + 4.4 * t * t  // 2차 곡선: st1=2.6 → st26=7.0 (부드러운 가속)
+    const gap = Math.max(88, 165 - 3 * t * 26)      // 간격 부드럽게 좁아짐
+    const wait = Math.max(40, 100 - 2.3 * t * 26)   // 스폰 부드럽게 빨라짐
     return { speed, gap, wait }
   }, [])
 
