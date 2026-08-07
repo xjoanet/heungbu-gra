@@ -104,11 +104,11 @@ function App() {
       {/* 풀스크린 명대사 스포트라이트 — 닫기 버튼 전까지 유지 */}
       {spot.on && (
         <div className="spot-ov">
-          <button className="spot-close" onClick={closeSpot} aria-label="닫기">✕ 닫기</button>
           <div className="spot-card">
             <div className="spot-quote">“{KDRAMA[spot.idx % KDRAMA.length].ko}”</div>
             <div className="spot-src">🎬 {KDRAMA[spot.idx % KDRAMA.length].src}</div>
             <div className="spot-flare">✨ 흥부 명대사!! 이 한 방 ✨</div>
+            <button className="spot-close" onClick={closeSpot}>✕ 닫기</button>
           </div>
         </div>
       )}
