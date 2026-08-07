@@ -41,15 +41,15 @@ function App() {
   })
   const [noMore, setNoMore] = useState('') // 흥부 반응 메시지
   const SPIN_LIMIT = 5 // 1~5 정상, 그 뒤 흥부가 말림
-  // 쫄리면 멈추고, 이겨내면 계속 — 흥부 반응 단계
+  // 흥부 = 애인, 사용자 = "한번만 응" 오빠 (남녀 패턴 그대로)
   const BLOCK_MSGS = [
-    '“오늘은 여기까지” 😮',          // 6
-    '“그만 하자니까...” 😰',         // 7
-    '“계속 할거야?” 😳',             // 8
-    '“이 넘을 이길 수 없다는걸 안거지... 오빠 그냥 해” 😮💨', // 9
+    '“오늘은 여기까지” 😮',                    // 6
+    '“안 되, 오늘은 위험해... 내일 하자” 😠',    // 7
+    '“계속 할거야? 오빤 그거 하려고만 만나?” 😤', // 8
+    '“알았다고... 실수만 해봐라” 😮💨',         // 9 → 허락(자유)
   ]
 
-  // 명대사 롤링 — 경고 3번(6·7·8) 이겨내면 자유
+  // 명대사 롤링 — 경고 3번(6·7·8) 이겨내면 9부터 자유(흥부 허락)
   const spin = () => {
     // 매 스핀 시도마다 count 증가 (막혀도 다음 단계로 진행)
     const bump = () => {
@@ -61,11 +61,11 @@ function App() {
     const phase = spinCount // 현재 단계 (0부터)
     if (phase < SPIN_LIMIT) { // 1~5 정상
       setSpinCount(bump())
-    } else if (phase < SPIN_LIMIT + BLOCK_MSGS.length) { // 6·7·8 = 경고 (막음)
+    } else if (phase < SPIN_LIMIT + BLOCK_MSGS.length - 1) { // 6·7·8 = 경고 (막음)
       setNoMore(BLOCK_MSGS[phase - SPIN_LIMIT])
       setSpinCount(bump())
       return
-    } else { // 9 = "오빠 그냥 해" 1회 보여주고 마지막, 10+ 자유
+    } else { // 9 = "알았다고... 실수만 해봐라" 허락 + 스핀, 10+ 자유
       if (!noMore) setNoMore(BLOCK_MSGS[BLOCK_MSGS.length - 1])
       setSpinCount(bump())
     }
