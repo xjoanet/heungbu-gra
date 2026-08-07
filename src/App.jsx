@@ -20,6 +20,8 @@ function App() {
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
   const [revOpen, setRevOpen] = useState(false) // 후기 전체 펼침
   const [spot, setSpot] = useState({ on: false, idx: null }) // 풀스크린 명대사 스포트라이트
+  const [intro, setIntro] = useState(true) // 진입 인트로 (흥월 오프닝)
+  const introIdx = useRef(Math.floor(Math.random() * KDRAMA.length)).current // 랜덤 명대사 고정
   const timer = useRef(null)
 
   // 후기 슬라이드 자동 회전 (리뷰 수 기반, 랭 변경 시 0으로)
@@ -100,6 +102,18 @@ function App() {
 
   return (
     <>
+      {/* 흥월 인트로 — 진입 시 랜덤 명대사 + 입장하기 */}
+      {intro && (
+        <div className="intro-ov">
+          <div className="intro-card">
+            <div className="intro-badge">🌍 흥부 월드에 오신 걸 환영합니다</div>
+            <div className="intro-quote">“{KDRAMA[introIdx].ko}”</div>
+            <div className="intro-src">🎬 {KDRAMA[introIdx].src}</div>
+            <div className="intro-note">명대사 한 방으로 AI를 깨우세요. ㅊㅊ 한마디면 충분합니다.</div>
+            <button className="intro-enter" onClick={() => setIntro(false)}>입장하기 →</button>
+          </div>
+        </div>
+      )}
       {/* 축포 오버레이 */}
       {/* 풀스크린 명대사 스포트라이트 — 닫기 버튼 전까지 유지 */}
       {spot.on && (

@@ -186,6 +186,17 @@ footer .funny { color: var(--gold-soft); }
 .spot-ov { position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,.86); display: flex; align-items: center; justify-content: center; padding: 24px; animation: spotFade .25s ease; }
 .spot-close { margin-top: 28px; display: inline-block; background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.25); padding: 12px 34px; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; transition: .15s; }
 .spot-close:hover { background: var(--gold); color: #211500; border-color: var(--gold); transform: scale(1.04); }
+
+/* 흥월 인트로 (진입 오프닝) */
+.intro-ov { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.96); display: flex; align-items: center; justify-content: center; padding: 24px; animation: introFade .5s ease; }
+.intro-badge { font-size: 13px; font-weight: 700; color: var(--gold-soft); letter-spacing: 1.5px; margin-bottom: 28px; }
+.intro-card { max-width: 760px; width: 100%; text-align: center; animation: spotZoom .5s ease; }
+.intro-quote { font-size: clamp(28px, 6.5vw, 58px); font-weight: 900; color: #fff; text-shadow: 0 0 40px rgba(245,195,107,.55); line-height: 1.3; }
+.intro-src { margin-top: 24px; font-size: clamp(16px, 3.2vw, 24px); color: var(--gold-soft); font-weight: 700; }
+.intro-note { margin-top: 22px; font-size: 13.5px; color: var(--muted); line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto; }
+.intro-enter { margin-top: 34px; background: var(--gold); color: #211500; border: none; padding: 15px 44px; border-radius: 40px; font-size: 17px; font-weight: 800; cursor: pointer; transition: .2s; box-shadow: 0 6px 24px rgba(245,195,107,.35); }
+.intro-enter:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(245,195,107,.5); }
+@keyframes introFade { from { opacity: 0; } to { opacity: 1; } }
 .spot-card { max-width: 720px; width: 100%; text-align: center; animation: spotZoom .3s ease; }
 .spot-quote { font-size: clamp(26px, 6vw, 52px); font-weight: 900; color: #fff; text-shadow: 0 0 30px rgba(245,195,107,.6); line-height: 1.35; letter-spacing: .5px; }
 .spot-src { margin-top: 22px; font-size: clamp(15px, 3vw, 22px); color: var(--gold-soft); font-weight: 700; }
