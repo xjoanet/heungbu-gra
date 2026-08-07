@@ -13,17 +13,17 @@ const KIDS = Array.from({ length: 26 }, (_, i) =>
    '민준이','하윤이','서연이','지우','준서','막내'][i] || `${i+1}째`
 )
 
-const GRAVITY = 0.5
-const JUMP = -8
-const GAME_W = 400
-const GAME_H = 280
+const GRAVITY = 0.8
+const JUMP = -13
+const GAME_W = 720
+const GAME_H = 460
 
 const KID_EMOJI = ['👶','🧒','👦','👧','👶','👦','👧','🧒','👶','👧','👦','👶','👧','🧒','👶','👦','👧','👶','🧒','👦','👧','👶','👦','🧒','👧','👶']
 
 export default function HeungbuGame() {
   const [state, setState] = useState('ready') // ready | playing | gameover | win
   const [stage, setStage] = useState(1)       // 1~26
-  const [birdY, setBirdY] = useState(140)
+  const [birdY, setBirdY] = useState(230)
   const [velocity, setVelocity] = useState(0)
   const [pipes, setPipes] = useState([])
   const [score, setScore] = useState(0)
@@ -35,7 +35,7 @@ export default function HeungbuGame() {
   const [isNewRecord, setIsNewRecord] = useState(false)
 
   const gameRef = useRef(null)
-  const birdYRef = useRef(140)
+  const birdYRef = useRef(230)
   const velRef = useRef(0)
   const pipeRef = useRef([])
   const stageRef = useRef(1)
@@ -52,11 +52,11 @@ export default function HeungbuGame() {
   }, [])
 
   const reset = useCallback(() => {
-    birdYRef.current = 140
+    birdYRef.current = 230
     velRef.current = 0
     pipeRef.current = []
     stageRef.current = 1
-    setBirdY(140); setVelocity(0); setPipes([]); setCrying('')
+    setBirdY(230); setVelocity(0); setPipes([]); setCrying('')
     setStage(1); setScore(0)
   }, [])
 
@@ -175,7 +175,7 @@ export default function HeungbuGame() {
       ))}
 
       {/* 아이(주인공) */}
-      <div style={{ position: 'absolute', left: 54, top: birdY, width: 26, height: 24, fontSize: 24, lineHeight:'24px', textAlign:'center', transform: `rotate(${Math.max(-25, Math.min(35, velocity * 3))}deg)`, transition:'transform 0.05s' }}>
+      <div style={{ position: 'absolute', left: 54, top: birdY, width: 34, height: 32, fontSize: 30, lineHeight:'24px', textAlign:'center', transform: `rotate(${Math.max(-25, Math.min(35, velocity * 3))}deg)`, transition:'transform 0.05s' }}>
         {KID_EMOJI[stage - 1]}
       </div>
 
