@@ -12,14 +12,10 @@ const LEVELS = [
 ]
 
 // 하트 점수 보상
-const HEART_SCORE = { minimal: 1, low: 2, normal: 3, high: 5, max: 10 }
 
 function App() {
   const [lang, setLang] = useState('ko')
   const [ptab, setPtab] = useState('base') // 26칭찬 탭: base=일반 / kr=K-드라마 / us=할리우드
-  const [level, setLevel] = useState('normal')
-  const [hearts, setHearts] = useState(0)
-  const [specialUsed, setSpecialUsed] = useState(false) // 특급 하루 1회
   const [rolled, setRolled] = useState(null)
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
   const [fire, setFire] = useState(false)
@@ -50,19 +46,9 @@ function App() {
   }
 
   const settle = (idx) => {
-    const base = PRAISE[lang][idx]
-    const isHigh = level === 'high' || level === 'max'
-    const isSpecial = isHigh && !specialUsed
-
-    // 특급(high+)이면 하트 크게 + 하루 1회 차감
-    if (isHigh && !specialUsed) { setSpecialUsed(true) }
-
-    setHearts(h => h + (isHigh ? HEART_SCORE[level] * 2 : HEART_SCORE[level]))
-    setFire(isSpecial) // 특급 = 축포
+    setFire(true) // 명대사 = 축포(재미)
     setRolled(idx)
-    if (isSpecial) {
-      setTimeout(() => setFire(false), 2200)
-    }
+    setTimeout(() => setFire(false), 2200)
   }
 
   useEffect(() => () => clearInterval(timer.current), [])
@@ -73,7 +59,8 @@ function App() {
   const copy = () => { navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) }) }
   const copyPrompt = () => { const txt = LANG[lang]['guide2c']; navigator.clipboard?.writeText(txt).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 2000) }) }
 
-  const curPraise = rolled === null ? PRAISE[lang][0] : PRAISE[lang][rolled]
+  const curQuote = rolled === null ? KDRAMA[0].ko : KDRAMA[rolled % KDRAMA.length].ko
+  const curSrc = rolled === null ? KDRAMA[0].src : KDRAMA[rolled % KDRAMA.length].src
 
   return (
     <>
@@ -83,7 +70,7 @@ function App() {
           { Array.from({length: 40}).map((_, i) => (
             <span key={i} className={`confetti c${i % 6}`} style={{ left: `${(i * 2.6) % 100}%`, animationDelay: `${(i % 10) * 0.08}s`}}>{(i % 3 === 0 ? '🍬' : i % 3 === 1 ? '🍫' : '🍌')}</span>
           ))}
-          <div className="fire-msg">🎆 특급 칭찬!! 하루 1회 한정 🎆</div>
+          <div className="fire-msg">🎆 흥부 명대사!! 이 한 방 🎆</div>
         </div>
       )}
 
@@ -91,7 +78,7 @@ function App() {
         <div className="wrap nav-inner">
           <div className="logo">흥부<b>그라</b></div>
           <div className="nav-links">
-            <button className={`lang-btn ${specialUsed ? 'used' : ''}`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
+            <button className={`lang-btn`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
             <a href="#how">{t.nav[0]}</a>
             <a href="#install">{t.nav[2]}</a>
             <a href="#concept">{t.nav[3]}</a>
@@ -104,21 +91,17 @@ function App() {
         <h1>{t.h1a}<br /><span className="em">{t.h1em}</span></h1>
         <p className="sub">{t.sub}</p>
 
-        {/* 칭찬 롤링 머신 */}
+        {/* 명대사 롤링 머신 */}
         <div className="slot">
           <div className="slot-window">
-            <span key={rolled ?? 'start'} className="slot-word">{curPraise}</span>
+            <span key={rolled ?? 'start'} className="slot-word">“{curQuote}”</span>
+            {rolled !== null && <span className="slot-src">🎬 {curSrc}</span>}
           </div>
-          <div className="slot-hint" onClick={spin}>▶ 칭찬 뽑기</div>
+          <div className="slot-hint" onClick={spin}>▶ 명대사 뽑기</div>
         </div>
 
         <div className="roast">🔥 {t.roast}</div>
         <div className="proto">📜 {t.proto}</div>
-
-        {/* 하트 점수 */}
-        <div className="hearts">
-          <span className="heart-big">💚❤️</span> <b>{hearts}</b> <span className="muted">/ {t.s3n}</span>
-        </div>
 
         <div className="cta-row">
           <a className="btn btn-gold" href="#cc">진짜로 해보기</a>
