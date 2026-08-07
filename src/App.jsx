@@ -18,7 +18,7 @@ function App() {
   const [ptab, setPtab] = useState('base') // 26칭찬 탭: base=일반 / kr=K-드라마 / us=할리우드
   const [rolled, setRolled] = useState(null)
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
-  const [fire, setFire] = useState(false)
+  const [spot, setSpot] = useState({ on: false, idx: null }) // 풀스크린 명대사 스포트라이트
   const timer = useRef(null)
 
   // 후기 슬라이드 자동 회전 (리뷰 수 기반, 랭 변경 시 0으로)
@@ -43,11 +43,11 @@ function App() {
   const SPIN_LIMIT = 5 // 1~5 정상, 그 뒤 흥부가 말림
   // 흥부 = 애인, 사용자 = "한번만 응" 오빠 (남녀 패턴 그대로)
   const BLOCK_MSGS = [
-    '“오늘은 여기까지” 😮',                    // 6
-    '“안 되, 오늘은 위험해... 내일 하자” 😠',    // 7
-    '“오빠는 돌리려고 오는거야...?” 😔',        // 8 (섭섭)
-    '“알았다고... 실수만 해봐라” 😮💨',         // 9 → 허락(자유)
+    '“오늘은 여기까지” 😮',                              // 6
+    '“안 되, 오늘은 위험해... 내일 하자” 😠',              // 7
+    '“오빠는 돌리려고 오는거야...?” 😔',                  // 8 (섭섭)
   ]
+  const GIVEUP_MSG = '“알았다고... 맘대로 해, 오빠는 포기했어” 😮💨' // 9 = 흥부 체념
 
   // 명대사 롤링 — 경고 3번(6·7·8) 이겨내면 9부터 자유(흥부 허락)
   const spin = () => {
@@ -65,8 +65,8 @@ function App() {
       setNoMore(BLOCK_MSGS[phase - SPIN_LIMIT])
       setSpinCount(bump())
       return
-    } else { // 9 = "알았다고... 실수만 해봐라" 허락 + 스핀, 10+ 자유
-      if (!noMore) setNoMore(BLOCK_MSGS[BLOCK_MSGS.length - 1])
+    } else { // 9+ = 흥부 체념(포기) + 자유 스핀
+      if (!noMore) setNoMore(GIVEUP_MSG)
       setSpinCount(bump())
     }
     let n = 0
@@ -80,9 +80,9 @@ function App() {
   }
 
   const settle = (idx) => {
-    setFire(true) // 명대사 = 축포(재미)
+    setSpot({ on: true, idx }) // 풀스크린 명대사 스포트라이트
     setRolled(idx)
-    setTimeout(() => setFire(false), 2200)
+    setTimeout(() => setSpot({ on: false, idx: null }), 2600)
   }
 
   useEffect(() => () => clearInterval(timer.current), [])
@@ -99,12 +99,14 @@ function App() {
   return (
     <>
       {/* 축포 오버레이 */}
-      {fire && (
-        <div className="fire-ov">
-          { Array.from({length: 40}).map((_, i) => (
-            <span key={i} className={`confetti c${i % 6}`} style={{ left: `${(i * 2.6) % 100}%`, animationDelay: `${(i % 10) * 0.08}s`}}>{(i % 3 === 0 ? '🍬' : i % 3 === 1 ? '🍫' : '🍌')}</span>
-          ))}
-          <div className="fire-msg">🎆 흥부 명대사!! 이 한 방 🎆</div>
+      {/* 풀스크린 명대사 스포트라이트 */}
+      {spot.on && (
+        <div className="spot-ov" onClick={() => setSpot({ on: false, idx: null })}>
+          <div className="spot-card">
+            <div className="spot-quote">“{KDRAMA[spot.idx % KDRAMA.length].ko}”</div>
+            <div className="spot-src">🎬 {KDRAMA[spot.idx % KDRAMA.length].src}</div>
+            <div className="spot-flare">✨ 흥부 명대사!! 이 한 방 ✨</div>
+          </div>
         </div>
       )}
 

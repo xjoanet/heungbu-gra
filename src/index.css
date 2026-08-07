@@ -180,6 +180,15 @@ footer .funny { color: var(--gold-soft); }
 .slot-hint:hover { background: var(--gold); color: #211500; }
 .slot-block { display: inline-block; cursor: pointer; margin: 0 auto 12px; padding: 8px 16px; background: var(--bg2); border: 1px dashed var(--gold); border-radius: 10px; font-size: 14px; font-weight: 700; color: var(--gold-soft); animation: pop .3s ease; text-align: center; }
 
+/* 풀스크린 명대사 스포트라이트 */
+.spot-ov { position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,.86); display: flex; align-items: center; justify-content: center; padding: 24px; animation: spotFade .25s ease; cursor: pointer; }
+.spot-card { max-width: 720px; width: 100%; text-align: center; animation: spotZoom .3s ease; }
+.spot-quote { font-size: clamp(26px, 6vw, 52px); font-weight: 900; color: #fff; text-shadow: 0 0 30px rgba(245,195,107,.6); line-height: 1.35; letter-spacing: .5px; }
+.spot-src { margin-top: 22px; font-size: clamp(15px, 3vw, 22px); color: var(--gold-soft); font-weight: 700; }
+.spot-flare { margin-top: 16px; font-size: 13px; color: var(--muted); letter-spacing: 2px; }
+@keyframes spotFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spotZoom { from { transform: scale(.8); opacity: .3; } to { transform: scale(1); opacity: 1; } }
+
 /* hearts */
 .hearts { margin: 16px 0; font-size: 20px; }
 .hearts .heart-big { font-size: 26px; }
