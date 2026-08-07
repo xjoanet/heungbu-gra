@@ -186,14 +186,22 @@ export default function HeungbuGame() {
   // 게임 종료 화면들용 — 버튼 클릭이 부모(점프)로 버블링되지 않게
   const stop = e => e.stopPropagation()
 
-  const restart = () => { reset(); setState('ready') }
+  const restart = () => {
+    reset()
+    playingRef.current = false
+    stateRef.current = 'ready'
+    setCrying('')
+    setState('ready')
+  }
 
   const label = state === 'win' ? '전원 생존!' :
     state === 'gameover' ? '다시 도전...' :
     '클릭/탭! (또는 스페이스)'
 
   return (
-    <div className="hbgame" onPointerDown={stateRef.current !== 'gameover' && stateRef.current !== 'win' ? jump : undefined}
+    <div className="hbgame"
+      onClick={stateRef.current === 'gameover' || stateRef.current === 'win' ? undefined : jump}
+      onPointerDown={stateRef.current === 'gameover' || stateRef.current === 'win' ? undefined : jump}
       style={{ width: GAME_W, height: GAME_H, position: 'relative', overflow: 'hidden', userSelect: 'none', touchAction: 'none', cursor: 'pointer' }}>
 
       {/* 배경 */}
@@ -234,7 +242,7 @@ export default function HeungbuGame() {
       )}
 
       {state === 'ready' && (
-        <div onPointerDown={e => { e.stopPropagation(); jump() }} style={{ position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.6)', color:'#fff', fontSize: 14 }}>
+        <div style={{ pointerEvents: 'none', position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.6)', color:'#fff', fontSize: 14 }}>
           <div style={{fontSize:30}}>👨‍👩‍👧‍👦</div>
           <div style={{fontWeight:700, margin:'6px 0 2px'}}>흥부 플래피 26</div>
           <div style={{fontSize:12, opacity:.7}}>26명 자식을 할머니 방으로 옮기자!</div>
@@ -244,7 +252,7 @@ export default function HeungbuGame() {
       )}
 
       {state === 'countdown' && (
-        <div style={{ position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.5)', color:'#ffd27a' }}>
+        <div style={{ pointerEvents: 'none', position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.5)', color:'#ffd27a' }}>
           <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>⏱ 자식들 재우는 중...</div>
           <div key={count} style={{ fontSize: 84, fontWeight: 900, lineHeight: 1, animation: 'hbpop 0.5s ease' }}>
             {count > 0 ? count : '출발!'}
@@ -257,7 +265,7 @@ export default function HeungbuGame() {
           <div style={{fontSize:26}}>😭💦</div>
           <div style={{fontWeight:700, margin:'6px 0'}}>그만! 아이가 울어버렸어!</div>
           <div style={{fontSize:12, opacity:.8, marginBottom:12}}>스테이지 {stage}/26 · 목표 {stage}까지</div>
-          <button onPointerDown={stop} onClick={restart} style={{padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시 처음부터</button>
+          <button onPointerDown={stop} onClick={e => { e.stopPropagation(); restart() }} style={{padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시 처음부터</button>
         </div>
       )}
 
@@ -274,7 +282,7 @@ export default function HeungbuGame() {
           )}
           <div style={{fontSize:15, fontWeight:700, marginTop:8, color:'#fff'}}>당신은 이제 <span style={{color:'#ffd27a'}}>흥부의 경지</span>에 이르렀습니다.</div>
           <div style={{fontSize:12, marginTop:6, color:'#ffd27a'}}>+5 커스텀 칭찬 슬롯 잠금 해제!! · 시도 {attempts}번째</div>
-          <button onPointerDown={stop} onClick={restart} style={{marginTop:14,padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시하기</button>
+          <button onPointerDown={stop} onClick={e => { e.stopPropagation(); restart() }} style={{marginTop:14,padding:'8px 18px', background:'#ffd27a', border:'none', borderRadius:999, fontWeight:700, fontSize:13, color:'#2a2418', cursor:'pointer'}}>다시하기</button>
         </div>
       )}
     </div>
