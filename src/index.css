@@ -178,6 +178,7 @@ footer .funny { color: var(--gold-soft); }
 @keyframes pop { 0%{ transform: scale(.6); opacity:.1; } 100%{ transform: scale(1); opacity:1; } }
 .slot-hint { display: inline-block; cursor: pointer; color: var(--text); border: 1px solid var(--gold); padding: 10px 22px; border-radius: 10px; font-weight: 800; transition: .15s; }
 .slot-hint:hover { background: var(--gold); color: #211500; }
+.slot-block { display: inline-block; cursor: pointer; margin: 0 auto 12px; padding: 8px 16px; background: var(--bg2); border: 1px dashed var(--gold); border-radius: 10px; font-size: 14px; font-weight: 700; color: var(--gold-soft); animation: pop .3s ease; text-align: center; }
 
 /* hearts */
 .hearts { margin: 16px 0; font-size: 20px; }

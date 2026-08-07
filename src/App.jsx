@@ -32,9 +32,43 @@ function App() {
 
   const t = LANG[lang]
   const MAX_IDX = 25 // 0~25 = 26개
+  const [spinCount, setSpinCount] = useState(() => {
+    const today = new Date().toDateString()
+    try {
+      const saved = JSON.parse(localStorage.getItem('hg_spin') || '{}')
+      return saved.date === today ? saved.count : 0
+    } catch { return 0 }
+  })
+  const [noMore, setNoMore] = useState('') // 흥부 반응 메시지
+  const SPIN_LIMIT = 5 // 1~5 정상, 그 뒤 흥부가 말림
+  // 쫄리면 멈추고, 이겨내면 계속 — 흥부 반응 단계
+  const BLOCK_MSGS = [
+    '“오늘은 여기까지” 😮',          // 6
+    '“그만 하자니까...” 😰',         // 7
+    '“계속 할거야?” 😳',             // 8
+    '“이 넘을 이길 수 없다는걸 안거지... 오빠 그냥 해” 😮💨', // 9
+  ]
 
-  // 칭찬 롤링 (진짜 카지노식 이펙트)
+  // 명대사 롤링 — 경고 3번(6·7·8) 이겨내면 자유
   const spin = () => {
+    // 매 스핀 시도마다 count 증가 (막혀도 다음 단계로 진행)
+    const bump = () => {
+      const today = new Date().toDateString()
+      const next = spinCount + 1
+      try { localStorage.setItem('hg_spin', JSON.stringify({ date: today, count: next })) } catch {}
+      return next
+    }
+    const phase = spinCount // 현재 단계 (0부터)
+    if (phase < SPIN_LIMIT) { // 1~5 정상
+      setSpinCount(bump())
+    } else if (phase < SPIN_LIMIT + BLOCK_MSGS.length) { // 6·7·8 = 경고 (막음)
+      setNoMore(BLOCK_MSGS[phase - SPIN_LIMIT])
+      setSpinCount(bump())
+      return
+    } else { // 9 = "오빠 그냥 해" 1회 보여주고 마지막, 10+ 자유
+      if (!noMore) setNoMore(BLOCK_MSGS[BLOCK_MSGS.length - 1])
+      setSpinCount(bump())
+    }
     let n = 0
     clearInterval(timer.current)
     timer.current = setInterval(() => {
@@ -97,6 +131,7 @@ function App() {
             <span key={rolled ?? 'start'} className="slot-word">“{curQuote}”</span>
             {rolled !== null && <span className="slot-src">🎬 {curSrc}</span>}
           </div>
+          {noMore && <div className="slot-block" onClick={() => setNoMore('')}>🐦 {noMore}</div>}
           <div className="slot-hint" onClick={spin}>▶ 명대사 뽑기</div>
         </div>
 
