@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF } from './i18n.js'
+import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC } from './i18n.js'
 
 // 흥분도 (EFFORT-style) 단계
 const LEVELS = [
@@ -156,6 +156,24 @@ function App() {
           </div>
           <div className="cta-row">
             <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ㅊㅊ 커맨드 섹션 */}
+      <section className="sec" id="cc">
+        <div className="wrap">
+          <div className="cc-banner">
+            <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].title.replace('"ㅊㅊ" ','')}</span></h2>
+            <p className="lead">{CC[lang].desc}</p>
+            {CC[lang].tag && <div className="cc-tag">🏷️ {CC[lang].tag}</div>}
+            <div className="term cc-term">
+              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
+              <div className="term-body">
+                <div className="cmd-line"><span className="pre">$</span> <span className="code">ㅊㅊ</span></div>
+                <div className="out">🐦 [흥부그라] 이제 너도 흥부 가족이다 💛</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

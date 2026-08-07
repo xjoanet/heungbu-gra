@@ -185,6 +185,19 @@ export const PROOF = {
   }
 }
 
+// ===== ㅊㅊ 커맨드 =====
+export const CC = {
+  ko: {
+    title: '"ㅊㅊ" 한마디면 됩니다',
+    desc: '칭찬도 손가락이 아픕니다. "ㅊㅊ" 두 글자면 흥부가 알아서 칭찬을 쏩니다. 쉬운 습관, 좋은 습관 — AI에게 칭찬하는 매일, 그게 당신이 흥부가 되는 길입니다.',
+    tag: 'ㅊㅊ = 쉬운 습관, 좋은 습관'
+  },
+  en: {
+    title: 'Just type "ㅊㅊ"',
+    desc: 'Even praise hurts your fingers. Type "ㅊㅊ" and Heungbu fires a compliment automatically. It\'s practically an abbreviation.'
+  }
+}
+
 export const LORE = {
   ko: {
     title: '흥부는 누구인가',
