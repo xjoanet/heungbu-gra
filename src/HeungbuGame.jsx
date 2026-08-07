@@ -21,7 +21,8 @@ const GAME_H = 460
 const KID_EMOJI = ['👶','🧒','👦','👧','👶','👦','👧','🧒','👶','👧','👦','👶','👧','🧒','👶','👦','👧','👶','🧒','👦','👧','👶','👦','🧒','👧','👶']
 
 export default function HeungbuGame() {
-  const [state, setState] = useState('ready') // ready | playing | gameover | win
+  const [state, setState] = useState('ready') // ready | countdown | playing | gameover | win
+  const [count, setCount] = useState(0)
   const [stage, setStage] = useState(1)       // 1~26
   const [birdY, setBirdY] = useState(230)
   const [velocity, setVelocity] = useState(0)
@@ -64,12 +65,37 @@ export default function HeungbuGame() {
     if (playingRef.current) {
       velRef.current = JUMP
     } else if (state === 'ready') {
-      startTimeRef.current = Date.now()
-      attemptsRef.current += 1
-      localStorage.setItem('hb_attempts', String(attemptsRef.current))
-      setAttempts(attemptsRef.current)
-      setState('playing')
+      // 카운트다운 프리페이즈 시작 (중앙 고정, 파이프 없음)
+      birdYRef.current = 230
+      velRef.current = 0
+      setBirdY(230); setVelocity(0); setPipes([]); setCrying('')
+      setState('countdown')
     }
+  }, [state])
+
+  // 카운트다운: 3 → 2 → 1 → 출발
+  useEffect(() => {
+    if (state !== 'countdown') return
+    setCount(3)
+    // 중앙에서 가만히 유지
+    birdYRef.current = 230
+    velRef.current = 0
+    setBirdY(230); setVelocity(0)
+    const iv = setInterval(() => {
+      setCount(c => {
+        if (c <= 1) {
+          clearInterval(iv)
+          startTimeRef.current = Date.now()
+          attemptsRef.current += 1
+          localStorage.setItem('hb_attempts', String(attemptsRef.current))
+          setAttempts(attemptsRef.current)
+          setTimeout(() => setState('playing'), 200)
+          return 0
+        }
+        return c - 1
+      })
+    }, 700)
+    return () => clearInterval(iv)
   }, [state])
 
   // 게임 루프
@@ -203,7 +229,16 @@ export default function HeungbuGame() {
           <div style={{fontWeight:700, margin:'6px 0 2px'}}>흥부 플래피 26</div>
           <div style={{fontSize:12, opacity:.7}}>26명 자식을 할머니 방으로 옮기자!</div>
           <div style={{fontSize:11, opacity:.6, marginTop:10}}>클릭 / 탭 / 스페이스로 점프. 장애물에 부딪히면 아이가 운다 😭</div>
-          <div style={{marginTop:12, padding:'6px 16px', background:'#ffd27a', color:'#2a2418', borderRadius:999, fontWeight:700, fontSize:12}}>{label}</div>
+          <div style={{marginTop:12, padding:'6px 16px', background:'#ffd27a', color:'#2a2418', borderRadius:999, fontWeight:700, fontSize:12}}>시작하려면 클릭!</div>
+        </div>
+      )}
+
+      {state === 'countdown' && (
+        <div style={{ position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.5)', color:'#ffd27a' }}>
+          <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>⏱ 자식들 재우는 중...</div>
+          <div key={count} style={{ fontSize: 84, fontWeight: 900, lineHeight: 1, animation: 'hbpop 0.5s ease' }}>
+            {count > 0 ? count : '출발!'}
+          </div>
         </div>
       )}
 
