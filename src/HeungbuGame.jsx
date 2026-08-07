@@ -53,7 +53,7 @@ export default function HeungbuGame({ lang = 'ko' }) {
     const t = (st - 1) / 25              // 0~1
     const speed = 4.2 + 4.3 * t * t  // 2차 곡선: st1=2.6 → st26=7.0 (부드러운 가속)
     const gap = Math.max(88, 165 - 3 * t * 26)      // 간격 부드럽게 좁아짐
-    const wait = Math.max(40, 100 - 2.3 * t * 26)   // 스폰 부드럽게 빨라짐
+    const wait = Math.max(30, 62 - 1.3 * t * 26)    // 스폰 자주 (화면당 기둥 3~4개)
     return { speed, gap, wait }
   }, [])
 
