@@ -13,8 +13,8 @@ const KIDS = Array.from({ length: 26 }, (_, i) =>
    '민준이','하윤이','서연이','지우','준서','막내'][i] || `${i+1}째`
 )
 
-const GRAVITY = 1.0
-const JUMP = -6
+const GRAVITY = 0.3
+const JUMP = -8
 const GAME_W = 720
 const GAME_H = 460
 
@@ -24,7 +24,7 @@ export default function HeungbuGame({ lang = 'ko' }) {
   const [state, setState] = useState('ready') // ready | countdown | playing | gameover | win
   const [count, setCount] = useState(0)
   const [stage, setStage] = useState(1)       // 1~26
-  const [birdY, setBirdY] = useState(230)
+  const [birdY, setBirdY] = useState(130)
   const [velocity, setVelocity] = useState(0)
   const [pipes, setPipes] = useState([])
   const [score, setScore] = useState(0)
@@ -36,7 +36,7 @@ export default function HeungbuGame({ lang = 'ko' }) {
   const [isNewRecord, setIsNewRecord] = useState(false)
 
   const gameRef = useRef(null)
-  const birdYRef = useRef(230)
+  const birdYRef = useRef(130)
   const velRef = useRef(0)
   const pipeRef = useRef([])
   const stageRef = useRef(1)
@@ -55,11 +55,11 @@ export default function HeungbuGame({ lang = 'ko' }) {
   }, [])
 
   const reset = useCallback(() => {
-    birdYRef.current = 230
+    birdYRef.current = 130
     velRef.current = 0
     pipeRef.current = []
     stageRef.current = 1
-    setBirdY(230); setVelocity(0); setPipes([]); setCrying('')
+    setBirdY(130); setVelocity(0); setPipes([]); setCrying('')
     setStage(1); setScore(0)
   }, [])
 
@@ -75,9 +75,9 @@ export default function HeungbuGame({ lang = 'ko' }) {
       velRef.current = JUMP
     } else if (s === 'ready') {
       // 카운트다운 프리페이즈 시작 (중앙 고정, 파이프 없음)
-      birdYRef.current = 230
+      birdYRef.current = 130
       velRef.current = 0
-      setBirdY(230); setVelocity(0); setPipes([]); setCrying('')
+      setBirdY(130); setVelocity(0); setPipes([]); setCrying('')
       setState('countdown')
     }
   }, [])
@@ -87,9 +87,9 @@ export default function HeungbuGame({ lang = 'ko' }) {
     if (state !== 'countdown') return
     setCount(3)
     // 중앙에서 가만히 유지
-    birdYRef.current = 230
+    birdYRef.current = 130
     velRef.current = 0
-    setBirdY(230); setVelocity(0)
+    setBirdY(130); setVelocity(0)
     const iv = setInterval(() => {
       setCount(c => {
         if (c <= 1) {
@@ -129,7 +129,7 @@ export default function HeungbuGame({ lang = 'ko' }) {
       // 파이프 스폰 (첫 60프레임(≈1.3초)은 스폰 안 함 = 시작 여유)
       const wait = last.wait
       const pipes = pipeRef.current.map(p => ({ ...p, x: p.x - last.speed }))
-      if (frame > 60 && frame % Math.floor(wait) === 0 && frame < 400) {
+      if (frame > 80 && frame % Math.floor(wait) === 0 && frame < 500) {
         const gap = last.gap
         const gapY = 40 + Math.random() * (GAME_H - 80 - gap)
         pipes.push({ x: GAME_W, gapY, gap, passed: false })
@@ -180,14 +180,17 @@ export default function HeungbuGame({ lang = 'ko' }) {
     return () => clearInterval(iv)
   }, [state, diff])
 
-  // ready 화면에서도 점프 시작
+  // 스페이스/위/클릭 키 → 점프 + 페이지 스크롤 방지 (모든 상태에서)
   useEffect(() => {
-    if (state === 'ready') {
-      const h = e => { e.preventDefault(); jump() }
-      window.addEventListener('keydown', h)
-      return () => window.removeEventListener('keydown', h)
+    const h = e => {
+      if (e.code === 'Space' || e.code === 'ArrowUp' || e.key === 'w') {
+        e.preventDefault() // 스페이스로 페이지 스크롤 되는 것 방지
+        if (stateRef.current !== 'gameover' && stateRef.current !== 'win') jump()
+      }
     }
-  }, [state, jump])
+    window.addEventListener('keydown', h)
+    return () => window.removeEventListener('keydown', h)
+  }, [jump])
 
   // 게임 종료 화면들용 — 버튼 클릭이 부모(점프)로 버블링되지 않게
   const stop = e => e.stopPropagation()
