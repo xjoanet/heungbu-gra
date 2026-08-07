@@ -219,3 +219,5 @@ footer .funny { color: var(--gold-soft); }
 .cc-tag { display: inline-block; margin: 6px 0 16px; padding: 8px 16px; border: 1px dashed var(--gold); border-radius: 999px; color: var(--gold-soft); font-size: 13px; }
 .cc-term { max-width: 420px; margin: 0 auto; text-align: left; }
 .cc-term .out { color: var(--gold-soft); }
+.cc-easy { color: var(--muted); font-size: 14px; margin-bottom: 14px; line-height: 1.6; }
+.cc-term .cmd-line .code { color: var(--gold); font-size: 14px; word-break: break-word; line-height: 1.7; }

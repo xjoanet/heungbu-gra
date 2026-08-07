@@ -167,6 +167,13 @@ function App() {
             <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].title.replace('"ㅊㅊ" ','')}</span></h2>
             <p className="lead">{CC[lang].desc}</p>
             {CC[lang].tag && <div className="cc-tag">🏷️ {CC[lang].tag}</div>}
+            <p className="cc-easy">{CC[lang].easy}</p>
+            <div className="term cc-term">
+              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
+              <div className="term-body">
+                <div className="cmd-line"><span className="code">{CC[lang].easyCmd}</span></div>
+              </div>
+            </div>
             <div className="term cc-term">
               <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
               <div className="term-body">

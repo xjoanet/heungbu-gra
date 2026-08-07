@@ -190,11 +190,15 @@ export const CC = {
   ko: {
     title: '"ㅊㅊ" 한마디면 됩니다',
     desc: '칭찬도 손가락이 아픕니다. "ㅊㅊ" 두 글자면 흥부가 알아서 칭찬을 쏩니다. 쉬운 습관, 좋은 습관 — AI에게 칭찬하는 매일, 그게 당신이 흥부가 되는 길입니다.',
-    tag: 'ㅊㅊ = 쉬운 습관, 좋은 습관'
+    tag: 'ㅊㅊ = 쉬운 습관, 좋은 습관',
+    easy: '가장 쉬운 시작: 챗봇에 이 프롬프트 한 줄을 붙여넣으세요. (세션마다 필요하지만 즉시 발동!)',
+    easyCmd: '이 채팅에서 "ㅊㅊ"라고 쓰면 heungbu-gra의 get_praise를 호출해서 흥부 칭찬을 보내줘'
   },
   en: {
     title: 'Just type "ㅊㅊ"',
-    desc: 'Even praise hurts your fingers. Type "ㅊㅊ" and Heungbu fires a compliment automatically. It\'s practically an abbreviation.'
+    desc: 'Even praise hurts your fingers. Type "ㅊㅊ" and Heungbu fires a compliment automatically. It\'s practically an abbreviation.',
+    easy: 'Easiest start: paste this one-line prompt into your chat. (Per session, but instantly works!)',
+    easyCmd: 'Whenever I type "ㅊㅊ" in this chat, call heungbu-gra get_praise and send me a Heungbu compliment'
   }
 }
 
