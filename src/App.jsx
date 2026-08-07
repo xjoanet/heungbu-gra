@@ -265,6 +265,9 @@ function App() {
               <li>{t.guide3}
                 <div className="guide-cmd">{t.guide3c}</div>
               </li>
+              <li>{t.guide4}
+                <div className="guide-cmd">{t.guide4c}</div>
+              </li>
             </ol>
           </div>
         </div>
