@@ -18,6 +18,7 @@ function App() {
   const [ptab, setPtab] = useState('base') // 26칭찬 탭: base=일반 / kr=K-드라마 / us=할리우드
   const [rolled, setRolled] = useState(null)
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
+  const [revOpen, setRevOpen] = useState(false) // 후기 전체 펼침
   const [spot, setSpot] = useState({ on: false, idx: null }) // 풀스크린 명대사 스포트라이트
   const timer = useRef(null)
 
@@ -149,13 +150,15 @@ function App() {
       {/* 사용자 후기 슬라이드 — 히어로 직후 훅 */}
       <div className="sec rev-strip">
         <div className="wrap">
-          <div className="rev-carousel">
-            <span className="rev-quote">“{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx]}”</span>
-            <span className="rev-user">— 사용자 후기 (예상)</span>
+          <div className="rev-carousel" onClick={() => setRevOpen(!revOpen)}>
+            <span className="rev-ai">🤖 {REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai}</span>
+            <span className="rev-quote">“{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].h}”</span>
+            {revOpen && <span className="rev-full">“{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].q}” <span className="rev-tap">▲ 접기</span></span>}
+            {!revOpen && <span className="rev-tap">▼ 후기 전체 보기</span>}
           </div>
           <div className="rev-dots">
             {REVIEW[lang === 'ko' ? 'ko' : 'en'].map((_, i) => (
-              <span key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => setRevIdx(i)} />
+              <span key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={(e) => { e.stopPropagation(); setRevIdx(i); setRevOpen(false); }} />
             ))}
           </div>
         </div>

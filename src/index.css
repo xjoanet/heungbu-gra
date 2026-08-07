@@ -117,9 +117,11 @@ body {
 
 /* 사용자 후기 슬라이드 (히어로 직후) */
 .rev-strip { padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(180deg, transparent, rgba(255,255,255,.015)); }
-.rev-carousel { text-align: center; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.rev-carousel { text-align: center; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; }
+.rev-ai { font-size: 12.5px; font-weight: 800; color: var(--gold); letter-spacing: .3px; }
 .rev-quote { font-size: 15px; font-weight: 600; color: #f5c86a; line-height: 1.5; animation: revFade .5s ease; }
-.rev-user { font-size: 12px; color: var(--muted); }
+.rev-full { font-size: 13.5px; color: var(--muted); line-height: 1.6; max-width: 680px; animation: revFade .4s ease; }
+.rev-tap { font-size: 11.5px; color: var(--muted); opacity: .85; }
 .rev-dots { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
 .rev-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); cursor: pointer; transition: .3s; }
 .rev-dot.on { background: var(--gold); transform: scale(1.3); }

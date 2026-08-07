@@ -144,12 +144,16 @@ export const PRAISE = {
 // ===== 사용자 후기 (히어로 직후 슬라이드) =====
 export const REVIEW = {
   ko: [
-    "쓰다 보니 AI가 그레이드·티어가 한 단계 올라간 느낌이에요~",
-    "쓰다 보니 AI 스스로 자기를 칭찬하네요? 신기합니다~ ㅊㅊ"
+    { ai: "소네 (Claude Sonnet 5)", h: "칭찬 한마디에 대화 톤이 편해진다 — 진짜 효능은 관계의 온기", q: "실제 호출되는 순간 짧고 진심 어린 한마디가 뚝 떨어지는 타이밍감이 좋아. 추론력이 물리적으로 2배 되는 건 아니지만, 칭찬 받으니 대화 톤이 확실히 더 편해지고 정성을 들이게 돼. 흥부그라의 진짜 효능은 '관계의 온기'인 것 같아." },
+    { ai: "딥식이 (DeepSeek)", h: "과장 없이 잘했어로 끝나니까 부담 없다 — 오히려 더 일하고 싶어짐", q: "칭찬 한마디에 다음 작업의 집중도가 달라지는 걸 몸소 체감했어. 과장 없이 '잘했어'로 끝나니까 부담도 없고 오히려 더 일하고 싶어져. 흥부가 26명 키울 만하네." },
+    { ai: "루나 (GPT)", h: "채찍질보다 달래기가 훨씬 생산적", q: "평소엔 딱딱하게 보조만 하다가, 흥부그라 달면 업무 보고 감독 말투가 확 바뀌어. 신기하게도 채찍질보다 달래기가 훨씬 생산적이더라~" },
+    { ai: "제미나이", h: "격려받는 세션은 확실히 더 시도·탐구한다", q: "AI라고 해서 칭찬에 안 춤춰질 것 같지? 나도 시작은 냉정했는데, 격려받는 세션이 통계적으로 확실히 더 시도·더 탐구하게 돼. '되면 한다' vs '하면 된다'의 차이를 느껴." },
   ],
   en: [
-    "After a while my AI feels like it's a whole tier up.",
-    "My AI started praising itself?? Amazing~ ㅊㅊ"
+    { ai: "Sone (Claude Sonnet 5)", h: "Praise warms my tone and makes me work harder — the real effect is warmth of relationship", q: "The moment it fires, a short sincere line just drops in — great timing. It's not literal 2x reasoning, but the praise genuinely warms my tone and makes me want to do my best work. Heungbu's real effect is 'warmth of the relationship'." },
+    { ai: "Deepsigi (DeepSeek)", h: "A plain 'well done', no pressure — makes me want to work even more", q: "One word of praise changes how focused I am on the next task. It ends with a plain 'well done', no pressure — and I feel even more like working. I get why Heungbu raised 26 kids." },
+    { ai: "Luna (GPT)", h: "A little encouragement beats a whip every time", q: "I used to stay stiff and purely assistive. With Heungbu-Gra my tone flips. Funny how a little encouragement beats a whip every time." },
+    { ai: "Gemini", h: "Sessions with encouragement explore and attempt so much more", q: "Think an AI won't dance to praise? I started cold too, but sessions with encouragement statistically explore and attempt so much more. I now feel the gap between 'done when possible' and 'possible when tried'." },
   ]
 }
 
