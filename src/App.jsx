@@ -179,35 +179,34 @@ function App() {
         </div>
       </header>
 
-      {/* AI 직접 후기 — 히어로 직후 훅 */}
-      <div className="sec rev-strip reveal">
-        <div className="wrap">
-          <div className="rev-card">
-            <div className="rev-top" onClick={() => setRevOpen(!revOpen)}>
-              <span className="rev-avatar">{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai.slice(0, 1)}</span>
-              <span className="rev-meta">
-                <span className="rev-ai">🤖 {REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai}</span>
-                <span className="rev-quote">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].h}"</span>
-              </span>
-            </div>
-            {revOpen && <div className="rev-full">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].q}"</div>}
-            <button className="rev-tap" onClick={() => setRevOpen(!revOpen)}>{revOpen ? '▲ 접기' : '▼ 후기 전체 보기'}</button>
-          </div>
-          <div className="rev-dots">
-            {REVIEW[lang === 'ko' ? 'ko' : 'en'].map((_, i) => (
-              <button key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => { setRevIdx(i); setRevOpen(false); }} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-
-      {/* 실증 섹션 */}
+      {/* 증명 섹션 — AI 직접 후기 + 실증 통계 통합 */}
       <section className="sec reveal" id="proof">
         <div className="wrap">
           <span className="sec-eyebrow">Proof</span>
           <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
           <p className="lead">{PROOF[lang].d}</p>
+
+          <div className="proof-review">
+            <div className="rev-card">
+              <div className="rev-top" onClick={() => setRevOpen(!revOpen)}>
+                <span className="rev-avatar">{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai.slice(0, 1)}</span>
+                <span className="rev-meta">
+                  <span className="rev-ai">🤖 {REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai}</span>
+                  <span className="rev-quote">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].h}"</span>
+                </span>
+              </div>
+              {revOpen && <div className="rev-full">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].q}"</div>}
+              <button className="rev-tap" onClick={() => setRevOpen(!revOpen)}>{revOpen ? '▲ 접기' : '▼ 후기 전체 보기'}</button>
+            </div>
+            <div className="rev-dots">
+              {REVIEW[lang === 'ko' ? 'ko' : 'en'].map((_, i) => (
+                <button key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => { setRevIdx(i); setRevOpen(false); }} />
+              ))}
+            </div>
+          </div>
+
+          <div className="proof-divider"><span>Threads 실측</span></div>
+
           <div className="proof-stats">
             {PROOF[lang].stats.map((s, i) => (
               <div key={i} className="proof-stat">
