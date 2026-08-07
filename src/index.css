@@ -234,3 +234,4 @@ footer .funny { color: var(--gold-soft); }
 .hw-n { position: absolute; top: 8px; right: 10px; font-size: 11px; color: var(--muted); font-weight: 700; }
 .hw-en { color: var(--gold-soft); font-size: 14px; line-height: 1.5; font-weight: 600; }
 .hw-src { color: var(--muted); font-size: 12px; }
+.hw-en-sub { color: var(--muted); font-size: 12px; line-height: 1.5; font-weight: 400; }

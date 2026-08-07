@@ -221,7 +221,8 @@ function App() {
               {HOLIYWOOD.map((h, i) => (
                 <div key={i} className="hollywood-cell">
                   <span className="hw-n">{i + 1}</span>
-                  <div className="hw-en">“{lang === 'ko' ? h.ko : h.en}”</div>
+                  <div className="hw-en">{h.en}</div>
+                  <div className="hw-en-sub">“{h.ko}”</div>
                   <div className="hw-src">🎬 {h.src}</div>
                 </div>
               ))}
