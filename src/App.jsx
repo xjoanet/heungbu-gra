@@ -161,9 +161,6 @@ function App() {
           <div className="slot-hint" onClick={spin}>▶ 명대사 뽑기</div>
         </div>
 
-        <div className="roast">🔥 {t.roast}</div>
-        <div className="proto">📜 {t.proto}</div>
-
         <div className="cta-row">
           <a className="btn btn-gold" href="#cc">진짜로 해보기</a>
           <a className="btn btn-ghost" href="#install">{t.cta1}</a>
