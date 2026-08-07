@@ -151,7 +151,7 @@ function App() {
             <button className={`lang-btn`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
             <a href="#cc">{t.nav[0]}</a>
             <a href="#how">{t.nav[1]}</a>
-            <a href="#install">{t.nav[2]}</a>
+            <a href="#install" className="nav-install">{t.nav[2]}</a>
             <a href="#concept">{t.nav[3]}</a>
           </div>
         </div>
@@ -374,6 +374,11 @@ function App() {
 
       <footer>
         <div className="wrap">
+          <p className="credit">
+            🐦 <a href="https://www.threads.net/@deepsik_e" target="_blank" rel="noopener">Threads @deepsik_e</a>
+            &nbsp;·&nbsp;
+            <a href="https://github.com/xjoanet/heungbu-gra" target="_blank" rel="noopener">GitHub</a>
+          </p>
           <p>{t.foot1}</p>
           <p className="funny">{t.foot2}</p>
           <p className="credit">🖋️ 공동작품 — 딥식이 × 스카이 (K-MCP 창시자 듀오)</p>

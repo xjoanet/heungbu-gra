@@ -87,6 +87,9 @@ body::after {
 }
 .nav-links a:hover { color: var(--gold-soft); }
 .nav-links a:hover::after { right: 0; }
+.nav-install { background: var(--gold); color: #211500 !important; padding: 7px 16px !important; border-radius: 30px; font-weight: 800 !important; }
+.nav-install::after { display: none !important; }
+.nav-install:hover { transform: scale(1.05); color: #211500 !important; }
 
 /* ---------- Hero ---------- */
 .hero { padding: 108px 0 76px; text-align: center; }
