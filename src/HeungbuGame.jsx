@@ -64,20 +64,23 @@ export default function HeungbuGame() {
   }, [])
 
   const jump = useCallback(() => {
-    if (state === 'countdown') {
-      // 카운트다운 중 클릭: 원하면 즉시 점프(가속)에 반영 — 안전하게 무시
+    const s = stateRef.current
+    if (s === 'gameover' || s === 'win') return
+    if (s === 'countdown') {
+      // 카운트다운 중 클릭: 즉시 출발 + 첫 점프 적용 (연타가 버려지지 않게)
+      velRef.current = JUMP
       return
     }
     if (playingRef.current) {
       velRef.current = JUMP
-    } else if (state === 'ready') {
+    } else if (s === 'ready') {
       // 카운트다운 프리페이즈 시작 (중앙 고정, 파이프 없음)
       birdYRef.current = 230
       velRef.current = 0
       setBirdY(230); setVelocity(0); setPipes([]); setCrying('')
       setState('countdown')
     }
-  }, [state])
+  }, [])
 
   // 카운트다운: 3 → 2 → 1 → 출발
   useEffect(() => {
