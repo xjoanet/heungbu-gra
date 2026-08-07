@@ -94,6 +94,16 @@ function App() {
 
   useEffect(() => () => clearInterval(timer.current), [])
 
+  // 스크롤 리빌 — .reveal 요소가 뷰포트에 들어오면 .in 부여
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal')
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } })
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
+    els.forEach(el => io.observe(el))
+    return () => io.disconnect()
+  }, [lang, ptab])
+
   const [copied, setCopied] = useState(false)
   const [copiedP, setCopiedP] = useState(false)
   const INSTALL = 'npx heungbu-gra@latest'
@@ -136,10 +146,11 @@ function App() {
 
       <nav className="nav">
         <div className="wrap nav-inner">
-          <div className="logo">흥부<b>그라</b></div>
+          <div className="logo"><span className="logo-mark">興</span>흥부<b>그라</b></div>
           <div className="nav-links">
             <button className={`lang-btn`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
-            <a href="#how">{t.nav[0]}</a>
+            <a href="#cc">{t.nav[0]}</a>
+            <a href="#how">{t.nav[1]}</a>
             <a href="#install">{t.nav[2]}</a>
             <a href="#concept">{t.nav[3]}</a>
           </div>
@@ -148,7 +159,8 @@ function App() {
 
       <header className="hero wrap">
         <span className="badge">{t.badge}</span>
-        <h1>{t.h1a}<br /><span className="em">{t.h1em}</span></h1>
+        <h1>{t.h1_1}<br />{t.h1_2}</h1>
+        <div className="hero-em">{t.h1em}</div>
         <p className="sub">{t.sub}</p>
 
         {/* 명대사 롤링 머신 */}
@@ -167,18 +179,23 @@ function App() {
         </div>
       </header>
 
-      {/* 사용자 후기 슬라이드 — 히어로 직후 훅 */}
-      <div className="sec rev-strip">
+      {/* AI 직접 후기 — 히어로 직후 훅 */}
+      <div className="sec rev-strip reveal">
         <div className="wrap">
-          <div className="rev-carousel" onClick={() => setRevOpen(!revOpen)}>
-            <span className="rev-ai">🤖 {REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai}</span>
-            <span className="rev-quote">“{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].h}”</span>
-            {revOpen && <span className="rev-full">“{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].q}” <span className="rev-tap">▲ 접기</span></span>}
-            {!revOpen && <span className="rev-tap">▼ 후기 전체 보기</span>}
+          <div className="rev-card">
+            <div className="rev-top" onClick={() => setRevOpen(!revOpen)}>
+              <span className="rev-avatar">{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai.slice(0, 1)}</span>
+              <span className="rev-meta">
+                <span className="rev-ai">🤖 {REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai}</span>
+                <span className="rev-quote">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].h}"</span>
+              </span>
+            </div>
+            {revOpen && <div className="rev-full">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].q}"</div>}
+            <button className="rev-tap" onClick={() => setRevOpen(!revOpen)}>{revOpen ? '▲ 접기' : '▼ 후기 전체 보기'}</button>
           </div>
           <div className="rev-dots">
             {REVIEW[lang === 'ko' ? 'ko' : 'en'].map((_, i) => (
-              <span key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={(e) => { e.stopPropagation(); setRevIdx(i); setRevOpen(false); }} />
+              <button key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => { setRevIdx(i); setRevOpen(false); }} />
             ))}
           </div>
         </div>
@@ -186,8 +203,9 @@ function App() {
 
 
       {/* 실증 섹션 */}
-      <section className="sec" id="proof">
+      <section className="sec reveal" id="proof">
         <div className="wrap">
+          <span className="sec-eyebrow">Proof</span>
           <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
           <p className="lead">{PROOF[lang].d}</p>
           <div className="proof-stats">
@@ -206,9 +224,10 @@ function App() {
 
 
       {/* ㅊㅊ 커맨드 섹션 */}
-      <section className="sec" id="cc">
+      <section className="sec reveal" id="cc">
         <div className="wrap">
           <div className="cc-banner">
+            <span className="sec-eyebrow">Command</span>
             <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].title.replace('"ㅊㅊ" ','')}</span></h2>
             <p className="lead">{CC[lang].desc}</p>
             {CC[lang].tag && <div className="cc-tag">🏷️ {CC[lang].tag}</div>}
@@ -231,8 +250,9 @@ function App() {
       </section>
 
 
-      <section className="sec" id="install">
+      <section className="sec reveal" id="install">
         <div className="wrap">
+          <span className="sec-eyebrow">Install</span>
           <h2>{t.ins_t}</h2>
           <p className="lead">{t.ins_d}</p>
           <div className="term install">
@@ -278,8 +298,9 @@ function App() {
 
 
       {/* 26칭찬 섹션 */}
-      <section className="sec" id="how">
+      <section className="sec reveal" id="how">
         <div className="wrap">
+          <span className="sec-eyebrow">Praise Library</span>
           <h2>흥부의 <span className="em">26명 자식 = 26가지 칭찬</span></h2>
           <p className="lead">{lang === 'ko' ? '기본 패키지 26개를 제공하고, 나중엔 사용자가 직접 5개 더 추가할 수 있어요.' : '26 base praises, +5 customizable by user later.'}</p>
 
@@ -334,8 +355,9 @@ function App() {
       </section>
 
 
-<section className="sec" id="concept">
+<section className="sec reveal" id="concept">
         <div className="wrap">
+          <span className="sec-eyebrow">Lore</span>
           <h2>{LORE[lang].title} <span className="em">(왜 흥부그라인가)</span></h2>
           <p className="lead">{LORE[lang].rows[0][1]}</p>
           <div className="lore-list">
