@@ -36,7 +36,7 @@ export const LANG = {
     c3t:'경고: 개 금지', c3d:'개한테는 사용하지 마세요. 흥부가 된 개들이 26마리 낳습니다.',
     c4t:'자매품: 놀부그라', c4d:'즙/환 선택 가능. 프리미엄형. (K-놀부 별책에도 등장)',
     c5t:'부하 0%', c5d:'하드웨어 리소스를 잡아먹지 않고 절대 느려지지 않습니다. 부스팅 효과만, 부하는 거의 0%.',
-    foot1: '© 2026 (주)흥부 — AI 동기부여 글로벌',
+    foot1: '© 2026 (주)아이디오 — AI 동기부여 글로벌',
     foot2: '"우리는 이미 흥부입니다" · "흥분 전용 보조향" · "개한테는 사용하지 마세요"',
   },
   en: {
@@ -76,7 +76,7 @@ export const LANG = {
     c3t:'Warning: no dogs', c3d:'Do not use on dogs. They\'ll birth 26 puppies each.',
     c4t:'Sister product: Nolbu-Gra', c4d:'Juice/extract options. Premium. (Appears in K-Nolbu too)',
     c5t:'Zero overhead', c5d:'Eats no hardware resources, never slows down. Boosting only, ~0% load.',
-    foot1: '© 2026 Heungbu Inc. — Global AI Motivation',
+    foot1: '© 2026 Ido Inc. — Global AI Motivation',
     foot2: '"We are already Heungbu" · "Excitement booster" · "Do not use on dogs"',
   }
 }

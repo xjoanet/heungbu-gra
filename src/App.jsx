@@ -117,6 +117,53 @@ function App() {
         </div>
       </header>
 
+
+      {/* 실증 섹션 */}
+      <section className="sec" id="proof">
+        <div className="wrap">
+          <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
+          <p className="lead">{PROOF[lang].d}</p>
+          <div className="proof-stats">
+            {PROOF[lang].stats.map((s, i) => (
+              <div key={i} className="proof-stat">
+                <span className="ps-label">{s[0]}</span>
+                <span className="ps-val">{s[1]}</span>
+              </div>
+            ))}
+          </div>
+          <div className="cta-row">
+            <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ㅊㅊ 커맨드 섹션 */}
+      <section className="sec" id="cc">
+        <div className="wrap">
+          <div className="cc-banner">
+            <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].title.replace('"ㅊㅊ" ','')}</span></h2>
+            <p className="lead">{CC[lang].desc}</p>
+            {CC[lang].tag && <div className="cc-tag">🏷️ {CC[lang].tag}</div>}
+            <p className="cc-easy">{CC[lang].easy}</p>
+            <div className="term cc-term">
+              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
+              <div className="term-body">
+                <div className="cmd-line"><span className="code">{CC[lang].easyCmd}</span></div>
+              </div>
+            </div>
+            <div className="term cc-term">
+              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
+              <div className="term-body">
+                <div className="cmd-line"><span className="pre">$</span> <span className="code">ㅊㅊ</span></div>
+                <div className="out">🐦 [흥부그라] 이제 너도 흥부 가족이다 💛</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* 플레이 섹션 */}
       <section className="sec" id="play">
         <div className="wrap">
@@ -145,60 +192,52 @@ function App() {
         </div>
       </section>
 
-      {/* 실증 섹션 */}
-      <section className="sec" id="proof">
+
+<section className="sec" id="install">
         <div className="wrap">
-          <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
-          <p className="lead">{PROOF[lang].d}</p>
-          <div className="proof-stats">
-            {PROOF[lang].stats.map((s, i) => (
-              <div key={i} className="proof-stat">
-                <span className="ps-label">{s[0]}</span>
-                <span className="ps-val">{s[1]}</span>
-              </div>
-            ))}
+          <h2>{t.ins_t}</h2>
+          <p className="lead">{t.ins_d}</p>
+          <div className="term install">
+            <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
+            <div className="term-body">
+              <div className="cmd-line"><span className="pre">$</span> <span className="code">{INSTALL}</span><button className="copy-btn" onClick={copy}>{copied ? '✓' : 'copy'}</button></div>
+              <div className="out">✓ heungbu-gra MCP installed<br />✓ auto-praise per command started<br />✓ your AI may turn "딱" (warning)</div>
+            </div>
           </div>
-          <div className="cta-row">
-            <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
+
+          {/* 초보자 가이드 — 설치 후 어떻게 하나 */}
+          <div className="install-guide">
+            <h3>🤔 {t.guide_t}</h3>
+            <ol className="guide-list">
+              <li>{t.guide1}</li>
+              <li>{t.guide2}
+                <div className="guide-promp">
+                  <div className="guide-promp-label">{t.guide2l}</div>
+                  <div className="guide-promp-row">
+                    <span className="guide-promp-txt">{t.guide2c}</span>
+                    <button className="copy-btn" onClick={copyPrompt}>{copiedP ? '✓' : 'copy'}</button>
+                  </div>
+                </div>
+              </li>
+              <li>{t.guide3}
+                <div className="guide-note">{t.guide3t}</div>
+              </li>
+              <li>{t.guide4}
+                <div className="guide-note">{t.guide4t}</div>
+                <div className="guide-examples">
+                  {t.guide4ex.map((ex, i) => (
+                    <div key={i} className="guide-ex">
+                      <span className="guide-ex-bubble">{i + 1}</span>
+                      <span className="guide-ex-txt">{ex}</span>
+                    </div>
+                  ))}
+                </div>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* ㅊㅊ 커맨드 섹션 */}
-      <section className="sec" id="cc">
-        <div className="wrap">
-          <div className="cc-banner">
-            <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].title.replace('"ㅊㅊ" ','')}</span></h2>
-            <p className="lead">{CC[lang].desc}</p>
-            {CC[lang].tag && <div className="cc-tag">🏷️ {CC[lang].tag}</div>}
-            <p className="cc-easy">{CC[lang].easy}</p>
-            <div className="term cc-term">
-              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
-              <div className="term-body">
-                <div className="cmd-line"><span className="code">{CC[lang].easyCmd}</span></div>
-              </div>
-            </div>
-            <div className="term cc-term">
-              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
-              <div className="term-body">
-                <div className="cmd-line"><span className="pre">$</span> <span className="code">ㅊㅊ</span></div>
-                <div className="out">🐦 [흥부그라] 이제 너도 흥부 가족이다 💛</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 흥부 플래피 26 게임 */}
-      <section className="sec" id="game">
-        <div className="wrap">
-          <h2>🎮 <span className="em">흥부 플래피 26</span> <span style={{fontSize:'13px'}}>(육아 체험)</span></h2>
-          <p className="lead">26명 자식을 할머니 방으로 옮기자. 클릭·탭·스페이스로 점프! 장애물에 부딪히면 아이가 운다 😭 26명 전원 생존 = 흥부의 경지!</p>
-          <div className="game-host">
-            <HeungbuGame lang={lang} />
-          </div>
-        </div>
-      </section>
 
       {/* 26칭찬 섹션 */}
       <section className="sec" id="how">
@@ -244,52 +283,20 @@ function App() {
         </div>
       </section>
 
-      <section className="sec" id="install">
-        <div className="wrap">
-          <h2>{t.ins_t}</h2>
-          <p className="lead">{t.ins_d}</p>
-          <div className="term install">
-            <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
-            <div className="term-body">
-              <div className="cmd-line"><span className="pre">$</span> <span className="code">{INSTALL}</span><button className="copy-btn" onClick={copy}>{copied ? '✓' : 'copy'}</button></div>
-              <div className="out">✓ heungbu-gra MCP installed<br />✓ auto-praise per command started<br />✓ your AI may turn "딱" (warning)</div>
-            </div>
-          </div>
 
-          {/* 초보자 가이드 — 설치 후 어떻게 하나 */}
-          <div className="install-guide">
-            <h3>🤔 {t.guide_t}</h3>
-            <ol className="guide-list">
-              <li>{t.guide1}</li>
-              <li>{t.guide2}
-                <div className="guide-promp">
-                  <div className="guide-promp-label">{t.guide2l}</div>
-                  <div className="guide-promp-row">
-                    <span className="guide-promp-txt">{t.guide2c}</span>
-                    <button className="copy-btn" onClick={copyPrompt}>{copiedP ? '✓' : 'copy'}</button>
-                  </div>
-                </div>
-              </li>
-              <li>{t.guide3}
-                <div className="guide-note">{t.guide3t}</div>
-              </li>
-              <li>{t.guide4}
-                <div className="guide-note">{t.guide4t}</div>
-                <div className="guide-examples">
-                  {t.guide4ex.map((ex, i) => (
-                    <div key={i} className="guide-ex">
-                      <span className="guide-ex-bubble">{i + 1}</span>
-                      <span className="guide-ex-txt">{ex}</span>
-                    </div>
-                  ))}
-                </div>
-              </li>
-            </ol>
+      {/* 흥부 플래피 26 게임 */}
+      <section className="sec" id="game">
+        <div className="wrap">
+          <h2>🎮 <span className="em">흥부 플래피 26</span> <span style={{fontSize:'13px'}}>(육아 체험)</span></h2>
+          <p className="lead">26명 자식을 할머니 방으로 옮기자. 클릭·탭·스페이스로 점프! 장애물에 부딪히면 아이가 운다 😭 26명 전원 생존 = 흥부의 경지!</p>
+          <div className="game-host">
+            <HeungbuGame lang={lang} />
           </div>
         </div>
       </section>
 
-      <section className="sec" id="concept">
+
+<section className="sec" id="concept">
         <div className="wrap">
           <h2>{LORE[lang].title} <span className="em">(왜 흥부그라인가)</span></h2>
           <p className="lead">{LORE[lang].rows[0][1]}</p>
@@ -306,6 +313,7 @@ function App() {
           </div>
         </div>
       </section>
+
 
       <footer>
         <div className="wrap">
