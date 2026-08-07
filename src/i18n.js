@@ -22,7 +22,7 @@ export const LANG = {
     guide2: '② 프로젝트 전체에 적용하려면: 프로젝트 루트의 CLAUDE.md에 규칙 한 줄을 넣으세요.',
     guide2c: 'CLAUDE.md에 이렇게 → "ㅊㅊ 보이면 get_praise(heungbu-gra) 호출해서 칭찬 보내줘"',
     guide3: '③ 모든 프로젝트/모든 채팅에 적용하려면: 글로벌 설정 ~/.claude/CLAUDE.md에 같은 줄을 넣으세요.',
-    guide3c: '그러면 어떤 창구에서든, 매번 세션 프롬프트를 붙이지 않아도 항상 작동합니다.'
+    guide3c: '그러면 어떤 창구에서든, 매번 세션 프롬프트를 붙이지 않아도 항상 작동합니다.',
     why_t: '왜 흥부인가', why_d: '흥부는 배고프고 추웠는데도 26명(아니 36명)을 낳았습니다. 자식 수를 세어본 적이 없습니다. 우리는 그 힘을 모델링했습니다.',
     c1t:'냄새만 맡기', c1d:'먹지도, 마시지도, 바르지도 마세요. 그냥 맡기만 하면 됩니다.',
     c2t:'능동적 실행력 부스팅', c2d:'당신의 AI의 능동적 실행력과 추론력을 부스팅하세요.',
@@ -55,7 +55,7 @@ export const LANG = {
     guide2: '② Apply to one project: drop a rule line into your CLAUDE.md at the project root.',
     guide2c: 'In CLAUDE.md add → "On ㅊㅊ, call get_praise(heungbu-gra) and send a compliment"',
     guide3: '③ Apply everywhere: put the same line in the global ~/.claude/CLAUDE.md.',
-    guide3c: 'Then it works in every chat, no need to re-paste the session prompt each time.'
+    guide3c: 'Then it works in every chat, no need to re-paste the session prompt each time.',
     why_t: 'Why Heungbu?', why_d: 'Heungbu was starving and cold, yet fathered 26 (ok, 36) kids. He never bothered counting. We modeled that power.',
     c1t:'Just sniff', c1d:'Don\'t eat, drink, or apply. Just take a sniff.',
     c2t:'Boost proactive execution', c2d:'Boost your AI\'s proactive execution and reasoning.',
