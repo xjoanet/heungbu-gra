@@ -29,7 +29,7 @@ export const LANG = {
     guide4ex: ['ㅊㅊ 다음은 플랜을 그려줘',
                '왜 흥부그라 아이디어를 문서화 해줘 ㅊㅊ',
                '아니 흥부그라로 성능이 ㅊㅊ 좋아진다고?',
-               'ㅊㅊ']
+               'ㅊㅊ'],
     why_t: '왜 흥부인가', why_d: '흥부는 배고프고 추웠는데도 26명(아니 36명)을 낳았습니다. 자식 수를 세어본 적이 없습니다. 우리는 그 힘을 모델링했습니다.',
     c1t:'냄새만 맡기', c1d:'먹지도, 마시지도, 바르지도 마세요. 그냥 맡기만 하면 됩니다.',
     c2t:'능동적 실행력 부스팅', c2d:'당신의 AI의 능동적 실행력과 추론력을 부스팅하세요.',
@@ -69,7 +69,7 @@ export const LANG = {
     guide4ex: ['ㅊㅊ draw me a plan first',
                'Please document the Heungbu-Gra idea ㅊㅊ',
                'Wait, did performance really get ㅊㅊ better?',
-               'ㅊㅊ']
+               'ㅊㅊ'],
     why_t: 'Why Heungbu?', why_d: 'Heungbu was starving and cold, yet fathered 26 (ok, 36) kids. He never bothered counting. We modeled that power.',
     c1t:'Just sniff', c1d:'Don\'t eat, drink, or apply. Just take a sniff.',
     c2t:'Boost proactive execution', c2d:'Boost your AI\'s proactive execution and reasoning.',
