@@ -115,7 +115,6 @@ export default function HeungbuGame({ lang = 'ko' }) {
   useEffect(() => {
     if (state !== 'playing') return
     playingRef.current = true
-    const last = diff()
     let frame = 0
     const iv = setInterval(() => {
       frame++
@@ -130,10 +129,9 @@ export default function HeungbuGame({ lang = 'ko' }) {
       setVelocity(velRef.current)
 
       // 파이프 스폰 (첫 60프레임(≈1.3초)은 스폰 안 함 = 시작 여유)
-      const wait = last.wait
-      const pipes = pipeRef.current.map(p => ({ ...p, x: p.x - last.speed }))
+      const { speed, gap, wait } = diff()
+      const pipes = pipeRef.current.map(p => ({ ...p, x: p.x - speed }))
       if (frame > 80 && frame % Math.floor(wait) === 0 && frame < 4000) {
-        const gap = last.gap
         const gapY = 40 + Math.random() * (GAME_H - 80 - gap)
         pipes.push({ x: GAME_W, gapY, gap, passed: false })
       }
