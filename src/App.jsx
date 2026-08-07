@@ -253,6 +253,20 @@ function App() {
               <div className="out">✓ heungbu-gra MCP installed<br />✓ auto-praise per command started<br />✓ your AI may turn "딱" (warning)</div>
             </div>
           </div>
+
+          {/* 초보자 가이드 — 설치 후 어떻게 하나 */}
+          <div className="install-guide">
+            <h3>🤔 {t.guide_t}</h3>
+            <ol className="guide-list">
+              <li>{t.guide1}</li>
+              <li>{t.guide2}
+                <div className="guide-cmd">{t.guide2c}</div>
+              </li>
+              <li>{t.guide3}
+                <div className="guide-cmd">{t.guide3c}</div>
+              </li>
+            </ol>
+          </div>
         </div>
       </section>
 
