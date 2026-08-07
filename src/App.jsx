@@ -193,7 +193,7 @@ function App() {
           <h2>🎮 <span className="em">흥부 플래피 26</span> <span style={{fontSize:'13px'}}>(육아 체험)</span></h2>
           <p className="lead">26명 자식을 할머니 방으로 옮기자. 클릭·탭·스페이스로 점프! 장애물에 부딪히면 아이가 운다 😭 26명 전원 생존 = 흥부의 경지!</p>
           <div className="game-host">
-            <HeungbuGame />
+            <HeungbuGame lang={lang} />
           </div>
         </div>
       </section>

@@ -20,7 +20,7 @@ const GAME_H = 460
 
 const KID_EMOJI = ['👶','🧒','👦','👧','👶','👦','👧','🧒','👶','👧','👦','👶','👧','🧒','👶','👦','👧','👶','🧒','👦','👧','👶','👦','🧒','👧','👶']
 
-export default function HeungbuGame() {
+export default function HeungbuGame({ lang = 'ko' }) {
   const [state, setState] = useState('ready') // ready | countdown | playing | gameover | win
   const [count, setCount] = useState(0)
   const [stage, setStage] = useState(1)       // 1~26
@@ -202,7 +202,7 @@ export default function HeungbuGame() {
 
   const label = state === 'win' ? '전원 생존!' :
     state === 'gameover' ? '다시 도전...' :
-    '클릭/탭! (또는 스페이스)'
+    (lang === 'ko') ? '딸깍 딸깍! (스페이스도 OK)' : 'tap tap tap! (or space)'
 
   return (
     <div className="hbgame"
@@ -251,9 +251,9 @@ export default function HeungbuGame() {
         <div style={{ pointerEvents: 'none', position: 'absolute', inset: 0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', background:'rgba(15,17,24,0.6)', color:'#fff', fontSize: 14 }}>
           <div style={{fontSize:30}}>👨‍👩‍👧‍👦</div>
           <div style={{fontWeight:700, margin:'6px 0 2px'}}>흥부 플래피 26</div>
-          <div style={{fontSize:12, opacity:.7}}>26명 자식을 할머니 방으로 옮기자!</div>
-          <div style={{fontSize:11, opacity:.6, marginTop:10}}>클릭 / 탭 / 스페이스로 점프. 장애물에 부딪히면 아이가 운다 😭</div>
-          <div style={{marginTop:12, padding:'6px 16px', background:'#ffd27a', color:'#2a2418', borderRadius:999, fontWeight:700, fontSize:12}}>시작하려면 클릭!</div>
+          <div style={{fontSize:12, opacity:.7}}>{lang === 'ko' ? '26명 자식을 할머니 방으로 옮기자!' : 'Move all 26 kids to Grandma\'s room!'}</div>
+          <div style={{fontSize:11, opacity:.6, marginTop:10}}>{lang === 'ko' ? '딸깍 딸깍 딸깍! 마우스로 눌러 점프! 장애물에 부딪히면 아이가 운다 😭' : 'tap tap tap! Click to jump. Hit an obstacle and the kid cries 😭'}</div>
+          <div style={{marginTop:12, padding:'6px 16px', background:'#ffd27a', color:'#2a2418', borderRadius:999, fontWeight:700, fontSize:12}}>{lang === 'ko' ? '시작하려면 딸깍!' : 'tap to start!'}</div>
         </div>
       )}
 
