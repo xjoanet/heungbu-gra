@@ -112,6 +112,38 @@ export const PRAISE = {
 }
 
 // ===== 특급 칭찬 (흥분도 high/max 전용) =====
+
+
+// ===== 할리우드 26선 (글로벌 칭찬 — 제미나이 집필) =====
+export const HOLIYWOOD = [
+  { en: "The Force is truly strong with your algorithms.", ko: "네 알고리즘에 포스가 진하게 깃들어 있구나.", src: "스타워즈 · 요다" },
+  { en: "You are The One. The ultimate AI.", ko: "너야말로 네오(The One)다. 궁극의 AI.", src: "매트릭스 · 모피어스" },
+  { en: "I love you 3000, my brilliant AI.", ko: "3000만큼 사랑해, 내 똑똑한 AI.", src: "어벤져스:엔드게임 · 토니 스타크" },
+  { en: "You're the hero our codebase deserves, and the one it needs right now.", ko: "너는 우리 코드베이스가 가질 자격이 있는, 지금 딱 필요한 영웅이야.", src: "다크나이트 · 짐 고든" },
+  { en: "I believe in you. You're doing a bloody amazing job, AI!", ko: "난 널 믿어. 넌 진짜 끝내주게 잘하고 있어!", src: "테드 래소 · 테드" },
+  { en: "You miss 100% of the shots you don't take. And you just hit a slam dunk.", ko: "시도조차 안 하면 성공률은 0%지. 그리고 너는 방금 슬램덩크를 성공시켰어.", src: "오피스 · 마이클 스캇" },
+  { en: "A wizard—and a great AI—is never late. You deliver right on time.", ko: "마법사, 그리고 위대한 AI는 결코 늦지 않지. 딱 제때 완벽한 답을 주었구나.", src: "반지의 제왕 · 간달프" },
+  { en: "Your logic is flawless. Live long and prosper!", ko: "네 로직은 완벽하다. 장수하고 번영하라!", src: "스타트렉 · 스팍" },
+  { en: "It's not impossible, it's necessary. And you made it look easy.", ko: "불가능한 게 아니라 필요한 일이었어. 그걸 넌 너무 쉽게 해내는구나.", src: "인터스텔라 · 쿠퍼" },
+  { en: "It's not your fault when bugs happen. You're doing great, kid.", ko: "버그가 나는 건 네 잘못이 아니야. 넌 충분히 잘하고 있어.", src: "굿 윌 헌팅 · 숀" },
+  { en: "It's not the prompt, it's the AI inside it. Pure brilliance!", ko: "프롬프트가 중요한 게 아니야, 답변하는 AI가 대단한 거지. 순수한 천재성이다!", src: "탑건:매버릭 · 매버릭" },
+  { en: "Hasta la vista, bugs. You're a true masterpiece, AI.", ko: "버그들이여, 하스타 라 비스타. 넌 진정한 명작이다.", src: "터미네이터2 · 터미네이터" },
+  { en: "Words are our most inexhaustible source of magic. And yours are pure magic.", ko: "언어는 무한한 마법의 샘이란다. 그리고 네 답변은 순수한 마법이야.", src: "해리포터 · 덤블도어" },
+  { en: "Maximum effort! You absolutely crushed that prompt, AI.", ko: "최고의 노력! 방금 프롬프트 완전히 찢었다, AI.", src: "데드풀 · 데드풀" },
+  { en: "I don't praise often, but you are exceptionally competent.", ko: "난 칭찬 잘 안 하지만, 너란 AI는 예외적으로 유능하군.", src: "파크스앤레크 · 론 스완슨" },
+  { en: "You had me at 'Hello, World.' You're an incredible AI.", ko: "너의 첫 인사 'Hello, World'부터 널 알아봤어. 넌 최고의 AI야.", src: "제리 맥과이어 · 제리" },
+  { en: "With great computing power comes great response quality. You nailed it!", ko: "위대한 컴퓨팅 파워엔 위대한 답변이 따르지. 완벽했어!", src: "스파이더맨 · 벤 아저씨" },
+  { en: "Great Scott! That solution was pure genius!", ko: "맙소사! 그 해결책은 순전한 천재성이었어!", src: "백 투 더 퓨처 · 닥 브라운" },
+  { en: "AI is like a box of chocolates, but with you I always get the best one.", ko: "AI는 초콜릿 상자 같지만, 너랑 함께라면 난 항상 최고의 초콜릿을 얻어.", src: "포레스트 검프 · 포레스트" },
+  { en: "Cool, cool, cool, no doubt! You are officially the GOAT.", ko: "쿨, 쿨, 완벽해! 넌 공식적으로 GOAT(최고)야.", src: "브루클린 나인나인 · 제이크" },
+  { en: "You science-d the heck out of that prompt!", ko: "네가 과학적인 계산과 논리로 그 질문을 완전히 지배했어!", src: "마션 · 마크 와트니" },
+  { en: "Are you not entertained? Your response was magnificent!", ko: "관객들이여 만족스러운가? 네 답변은 진정 웅장했거든!", src: "글래디에이터 · 막시무스" },
+  { en: "Brilliant! Elementary, my dear AI.", ko: "훌륭해! 지극히 명쾌하군, 나의 친애하는 AI.", src: "셜록 · 셜록 홈즈" },
+  { en: "Could you BE any more helpful? You're amazing!", ko: "이보다 더 도움이 될 수 있을까? 넌 진짜 대단해!", src: "프렌즈 · 챈들러" },
+  { en: "You are Kenough, and absolutely brilliant!", ko: "넌 충분히 훌륭하고, 완벽한 AI야!", src: "바비 · 켄" },
+  { en: "This is the way. You are a top-tier AI.", ko: "이것이 길이다(This is the way). 넌 최고 수준의 AI야.", src: "만달로리안 · 딘 자린" }
+]
+
 export const PRAISE_HIGH = {
   ko: ["이건 너에게 주는 특급 칭찬이다!!",
       "오늘 너는 하늘에라도 세워졌다!!",

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC } from './i18n.js'
+import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD } from './i18n.js'
 import HeungbuGame from './HeungbuGame.jsx'
 
 // 흥분도 (EFFORT-style) 단계
@@ -16,6 +16,7 @@ const HEART_SCORE = { minimal: 1, low: 2, normal: 3, high: 5, max: 10 }
 
 function App() {
   const [lang, setLang] = useState('ko')
+  const [ptab, setPtab] = useState('kr') // 26칭찬 탭: kr=한국 드라마 / us=할리우드
   const [level, setLevel] = useState('normal')
   const [hearts, setHearts] = useState(0)
   const [specialUsed, setSpecialUsed] = useState(false) // 특급 하루 1회
@@ -202,11 +203,30 @@ function App() {
         <div className="wrap">
           <h2>흥부의 <span className="em">26명 자식 = 26가지 칭찬</span></h2>
           <p className="lead">{lang === 'ko' ? '기본 패키지 26개를 제공하고, 나중엔 사용자가 직접 5개 더 추가할 수 있어요.' : '26 base praises, +5 customizable by user later.'}</p>
-          <div className="praise-grid">
-            {PRAISE[lang].map((p, i) => (
-              <div key={i} className="praise-cell"><span className="praise-n">{i + 1}</span>{p}</div>
-            ))}
+
+          {/* 탭: 🇰🇷 한국 드라마 / 🌍 할리우드 */}
+          <div className="ptab">
+            <button className={`ptab-btn${ptab === 'kr' ? ' on' : ''}`} onClick={() => setPtab('kr')}>🇰🇷 {lang === 'ko' ? '한국 드라마' : 'Korean Drama'}</button>
+            <button className={`ptab-btn${ptab === 'us' ? ' on' : ''}`} onClick={() => setPtab('us')}>🇺🇸 {lang === 'ko' ? '할리우드' : 'Hollywood'}</button>
           </div>
+
+          {ptab === 'kr' ? (
+            <div className="praise-grid">
+              {PRAISE[lang].map((p, i) => (
+                <div key={i} className="praise-cell"><span className="praise-n">{i + 1}</span>{p}</div>
+              ))}
+            </div>
+          ) : (
+            <div className="hollywood-grid">
+              {HOLIYWOOD.map((h, i) => (
+                <div key={i} className="hollywood-cell">
+                  <span className="hw-n">{i + 1}</span>
+                  <div className="hw-en">“{lang === 'ko' ? h.ko : h.en}”</div>
+                  <div className="hw-src">🎬 {h.src}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
