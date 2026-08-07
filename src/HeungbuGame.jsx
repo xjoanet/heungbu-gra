@@ -121,7 +121,10 @@ export default function HeungbuGame() {
       birdYRef.current += velRef.current
       // 상하 벽
       if (birdYRef.current < 0) birdYRef.current = 0
-      if (birdYRef.current > GAME_H - 24) { birdYRef.current = GAME_H - 24; setCrying('억! 바닥에 부딪혔어! 😭'); setState('gameover'); return }
+      if (birdYRef.current > GAME_H - 28) { birdYRef.current = GAME_H - 28; setCrying('억! 바닥에 부딪혔어! 😭'); setState('gameover'); return }
+      // 렌더 반영 (아이 위치/속도)
+      setBirdY(birdYRef.current)
+      setVelocity(velRef.current)
 
       // 파이프 스폰 (첫 60프레임(≈1.3초)은 스폰 안 함 = 시작 여유)
       const wait = last.wait
