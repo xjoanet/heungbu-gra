@@ -137,6 +137,8 @@ body::after {
   background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .sec .lead { color: var(--muted); font-size: var(--fs-md); margin-bottom: 40px; max-width: 640px; line-height: var(--lh-loose); }
+#proof { text-align: center; }
+#proof .lead { margin-left: auto; margin-right: auto; }
 
 /* ---------- scroll reveal ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
