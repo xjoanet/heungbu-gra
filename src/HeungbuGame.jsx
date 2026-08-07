@@ -13,8 +13,8 @@ const KIDS = Array.from({ length: 26 }, (_, i) =>
    '민준이','하윤이','서연이','지우','준서','막내'][i] || `${i+1}째`
 )
 
-const GRAVITY = 0.3
-const JUMP = -8
+const GRAVITY = 0.35
+const JUMP = -5
 const GAME_W = 720
 const GAME_H = 460
 
