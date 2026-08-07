@@ -51,7 +51,7 @@ export default function HeungbuGame({ lang = 'ko' }) {
     // 부드러운 2차 가속 커브: 초반 살짝 → 후반으로 갈수록 가속도 붙어 긴장감 고조
     // 갑자기 빨라지지 않고 "슬슬슬" 계속 가속되는 느낌
     const t = (st - 1) / 25              // 0~1
-    const speed = 2.6 + 4.4 * t * t  // 2차 곡선: st1=2.6 → st26=7.0 (부드러운 가속)
+    const speed = 4.2 + 4.3 * t * t  // 2차 곡선: st1=2.6 → st26=7.0 (부드러운 가속)
     const gap = Math.max(88, 165 - 3 * t * 26)      // 간격 부드럽게 좁아짐
     const wait = Math.max(40, 100 - 2.3 * t * 26)   // 스폰 부드럽게 빨라짐
     return { speed, gap, wait }
