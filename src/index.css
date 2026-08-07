@@ -122,6 +122,22 @@ body {
 .guide-list li { font-size: 14.5px; color: var(--muted); line-height: 1.6; padding-left: 40px; position: relative; }
 .guide-list li::before { counter-increment: g; content: counter(g); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: #0a0812; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; }
 .guide-cmd { margin-top: 8px; padding: 10px 14px; background: #0a0812; border: 1px dashed var(--gold); border-radius: 8px; font-family: 'SF Mono','Menlo',monospace; font-size: 12.5px; color: #c9c2b8; margin-left: 0; }
+
+/* 프롬프트 복사 박스 */
+.guide-promp { margin-top: 10px; background: #0a0812; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.guide-promp-label { padding: 8px 14px; font-size: 12.5px; font-weight: 700; color: var(--gold); background: rgba(200,170,80,.08); border-bottom: 1px solid var(--line); }
+.guide-promp-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+.guide-promp-txt { flex: 1; font-family: 'SF Mono','Menlo',monospace; font-size: 12.5px; color: #c9c2b8; line-height: 1.5; }
+.guide-promp .copy-btn { margin-left: 0; flex-shrink: 0; }
+
+/* 안내 노트 (CLAUDE.md 설명 등) — 코드 박스 아님 */
+.guide-note { margin-top: 8px; padding: 12px 14px; background: rgba(255,255,255,.03); border-left: 3px solid var(--gold); border-radius: 6px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ㅊㅊ 활용 예시 */
+.guide-examples { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.guide-ex { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; }
+.guide-ex-bubble { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #0a0812; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.guide-ex-txt { font-family: 'SF Mono','Menlo',monospace; font-size: 13.5px; color: #e8e2d6; }
 .copy-btn { margin-left: auto; background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 12px; }
 .copy-btn:hover { color: var(--gold); border-color: var(--gold); }
 

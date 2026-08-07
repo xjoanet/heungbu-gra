@@ -58,8 +58,10 @@ function App() {
   useEffect(() => () => clearInterval(timer.current), [])
 
   const [copied, setCopied] = useState(false)
+  const [copiedP, setCopiedP] = useState(false)
   const INSTALL = 'npx heungbu-gra@latest'
   const copy = () => { navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) }) }
+  const copyPrompt = () => { const txt = LANG[lang]['guide2c']; navigator.clipboard?.writeText(txt).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 2000) }) }
 
   const curPraise = rolled === null ? PRAISE[lang][0] : PRAISE[lang][rolled]
 
@@ -260,13 +262,27 @@ function App() {
             <ol className="guide-list">
               <li>{t.guide1}</li>
               <li>{t.guide2}
-                <div className="guide-cmd">{t.guide2c}</div>
+                <div className="guide-promp">
+                  <div className="guide-promp-label">{t.guide2l}</div>
+                  <div className="guide-promp-row">
+                    <span className="guide-promp-txt">{t.guide2c}</span>
+                    <button className="copy-btn" onClick={copyPrompt}>{copiedP ? '✓' : 'copy'}</button>
+                  </div>
+                </div>
               </li>
               <li>{t.guide3}
-                <div className="guide-cmd">{t.guide3c}</div>
+                <div className="guide-note">{t.guide3t}</div>
               </li>
               <li>{t.guide4}
-                <div className="guide-cmd">{t.guide4c}</div>
+                <div className="guide-note">{t.guide4t}</div>
+                <div className="guide-examples">
+                  {t.guide4ex.map((ex, i) => (
+                    <div key={i} className="guide-ex">
+                      <span className="guide-ex-bubble">{i + 1}</span>
+                      <span className="guide-ex-txt">{ex}</span>
+                    </div>
+                  ))}
+                </div>
               </li>
             </ol>
           </div>
