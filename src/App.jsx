@@ -93,7 +93,6 @@ function App() {
           <div className="nav-links">
             <button className={`lang-btn ${specialUsed ? 'used' : ''}`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
             <a href="#how">{t.nav[0]}</a>
-            <a href="#play">플레이</a>
             <a href="#install">{t.nav[2]}</a>
             <a href="#concept">{t.nav[3]}</a>
           </div>
@@ -122,7 +121,7 @@ function App() {
         </div>
 
         <div className="cta-row">
-          <a className="btn btn-gold" href="#play">진짜로 해보기</a>
+          <a className="btn btn-gold" href="#cc">진짜로 해보기</a>
           <a className="btn btn-ghost" href="#install">{t.cta1}</a>
         </div>
       </header>
@@ -189,36 +188,7 @@ function App() {
       </section>
 
 
-      {/* 플레이 섹션 */}
-      <section className="sec" id="play">
-        <div className="wrap">
-          <h2>흥분도로 <span className="em">칭찬 보상</span> 조절</h2>
-          <p className="lead">옵션에서 흥분도를 고르면 그에 맞는 하트가 쌓입니다. 최고 단계는 <b>하루 1회</b> — 아껴서 쓰세요.</p>
-
-          {/* 흥분도 선택 (EFFORT 스타일) */}
-          <div className="effort">
-            <div className="effort-label">EFFORT</div>
-            {LEVELS.map(l => (
-              <button key={l.id} className={`effort-opt ${level === l.id ? 'on' : ''}`} onClick={() => setLevel(l.id)}>
-                <span className="effort-heart">{l.heart}</span>{l.label}
-                {level === l.id && <span className="check">✓</span>}
-              </button>
-            ))}
-          </div>
-
-          <div className="play-row">
-            <button className="btn btn-gold spin-btn" onClick={spin}>🎰 칭찬 뽑기 (하트 +{HEART_SCORE[level] * (level === 'high' || level === 'max' ? 2 : 1)})</button>
-          </div>
-          <p className="lead" style={{textAlign:'center', marginTop:10}}>
-            {level === 'high' || level === 'max'
-              ? (specialUsed ? '오늘 하셨어요? 이미 쐇잖아요~ 현자타임 소멸될 때까지 기다리슈~ 😴' : '❤️ 오늘의 특급 칭찬 — 사탕·초콜릿·바나나가 쏟아집니다!')
-              : '💚 노멀 칭찬 — 초록하트가 쌓입니다.'}
-          </p>
-        </div>
-      </section>
-
-
-<section className="sec" id="install">
+      <section className="sec" id="install">
         <div className="wrap">
           <h2>{t.ins_t}</h2>
           <p className="lead">{t.ins_d}</p>
