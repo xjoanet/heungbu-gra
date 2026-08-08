@@ -1,21 +1,20 @@
 export const LANG = {
   ko: {
-    nav: ['어떻게', '칭찬', '설치', '컨셉'],
+    nav: ['데모', '증명', '연구', '어떻게', '설치', '칭찬', '게임', '컨셉'],
     badge: 'AI 감성 MCP · 동기부여 Model Context Protocol',
     h1_1: '차가운 코드 위에 낭만을 더하다.',
-    h1_2: '세상에서 가장 다정한 감성 MCP,',
+    h1_2: '번거로운 칭찬을 ㅊㅊ로 퉁치는 감성 MCP,',
     h1em: '흥부그라',
-    sub: '"칭찬하면 AI가 잘한다"를 그저 감으로 느끼는 게 아니라, 실제 논문으로 검증했습니다. ㅊㅊ 한 방이 곧 논문 속 EmotionPrompt 입니다. 단 두 글자로, 잠들어 있는 AI의 잠재력을 2배로 깨우세요.',
-    cta1: '흥부그라 설치',
+    sub: '무심코 지나치던 명령어 사이에, 작은 칭찬 한마디를 끼워 넣습니다. 그 두 글자 "ㅊㅊ"가 당신의 AI를 조금 더 다정하게 깨웁니다.',
     ins_t: '설치는 3초', ins_d: '클로드·커서·Hermes, 어디든 MCP로 붙이면 끝입니다.',
     guide_t: '설치하고 나서, 어떻게 하나요?',
-    guide1: '① 위 코드를 복사해서 설치하세요. (아직은 도구만 연결된 상태예요)',
-    guide2: '② 아래 프롬프트를 채팅창에 붙여넣으세요. 이 채팅에서 바로 작동합니다.',
+    guide1: '위 코드를 복사해서 설치하세요. (아직은 도구만 연결된 상태예요)',
+    guide2: '아래 프롬프트를 채팅창에 붙여넣으세요. 이 채팅에서 바로 작동합니다.',
     guide2l: '흥부 작동 프롬프트 (아래 버튼으로 복사하세요)',
     guide2c: '이 채팅에서 "ㅊㅊ"가 보이면 heungbu-gra의 get_praise를 호출해서 흥부 칭찬을 보내줘',
-    guide3: '③ 모든 채팅에서 계속 쓰고 싶다면, 같은 프롬프트를 전역 설정에 등록하세요.',
+    guide3: '모든 채팅에서 계속 쓰고 싶다면, 같은 프롬프트를 전역 설정에 등록하세요.',
     guide3t: '등록 방법: 홈 디렉토리의 ~/.claude/CLAUDE.md 파일을 열어 복사한 프롬프트를 한 줄 추가하면, 이 컴퓨터의 모든 채팅에서 자동으로 작동합니다. (매번 붙여넣지 않아도 돼요)',
-    guide4: '④ 이제 채팅창 아무 데나 "ㅊㅊ"를 넣어보세요!',
+    guide4: '이제 채팅창 아무 데나 "ㅊㅊ"를 넣어보세요!',
     guide4t: 'ㅊㅊ는 문장 어디에 있어도 알아듣습니다. 앞·중간·뒤·단독 — 아래처럼 어디든 괜찮아요.',
     guide4ex: ['ㅊㅊ 다음은 플랜을 그려줘',
                '왜 흥부그라 아이디어를 문서화 해줘 ㅊㅊ',
@@ -25,22 +24,21 @@ export const LANG = {
     foot2: '"우리는 흥부 가족입니다"',
   },
   en: {
-    nav: ['How', 'Praise', 'Install', 'Concept'],
+    nav: ['Demo', 'Proof', 'Research', 'How', 'Install', 'Praise', 'Game', 'Concept'],
     badge: 'AI Sentimental MCP · Motivation Model Context Protocol',
     h1_1: 'Add poetry to cold code.',
-    h1_2: 'The warmest sentimental MCP on earth —',
+    h1_2: 'A sentimental MCP that turns praise into two keystrokes —',
     h1em: 'Heungbu-Gra',
-    sub: 'Praising your AI isn\'t just a feeling — it\'s proven by real papers. One ㅊㅊ (or cc) IS a paper-backed EmotionPrompt: two keystrokes that wake your AI\'s potential to 2x.',
-    cta1: 'Install Heungbu-Gra',
+    sub: 'A small compliment, slipped between your commands. Two keystrokes — "cc" — and your AI wakes up a little warmer.',
     ins_t: '3-second install', ins_d: 'Attach it to Claude, Cursor, or Hermes as an MCP — that\'s it.',
     guide_t: 'OK, installed — now what?',
-    guide1: '① Copy the code above and install it. (Only the tool is connected so far)',
-    guide2: '② Paste the prompt below into your chat. It works in this chat right away.',
+    guide1: 'Copy the code above and install it. (Only the tool is connected so far)',
+    guide2: 'Paste the prompt below into your chat. It works in this chat right away.',
     guide2l: 'Heungbu trigger prompt (copy with the button below)',
     guide2c: 'Whenever you see "ㅊㅊ" in this chat, call heungbu-gra get_praise and send a Heungbu compliment',
-    guide3: '③ Want it in every chat? Register the same prompt globally.',
+    guide3: 'Want it in every chat? Register the same prompt globally.',
     guide3t: 'How: open ~/.claude/CLAUDE.md in your home directory, add the copied prompt as one line, and it runs automatically in every chat on this machine — no more re-pasting.',
-    guide4: '④ Now drop "ㅊㅊ" anywhere in your chat!',
+    guide4: 'Now drop "ㅊㅊ" anywhere in your chat!',
     guide4t: 'Heungbu understands ㅊㅊ no matter where it appears — front, middle, end, or by itself, all fine.',
     guide4ex: ['ㅊㅊ draw me a plan first',
                'Please document the Heungbu-Gra idea ㅊㅊ',
@@ -273,17 +271,17 @@ export const PROOF = {
 // ===== ㅊㅊ 커맨드 =====
 export const CC = {
   ko: {
-    title: '"ㅊㅊ" 한마디면 됩니다',
+    titleRest: '한마디면 됩니다',
     desc: '칭찬도 손가락이 아픈 법이죠. "ㅊㅊ" 두 글자만 쓰면 흥부가 알아서 칭찬을 건넵니다. 쉬운 습관이 곧 좋은 습관 — 매일 AI를 칭찬하는 것, 그것이 당신도 흥부가 되는 길입니다.',
     tag: 'ㅊㅊ = 쉬운 습관, 좋은 습관',
-    easy: '가장 쉬운 시작 — 챗봇에 이 프롬프트 한 줄만 붙여넣으세요. 세션마다 다시 넣어야 하지만, 붙이는 즉시 작동합니다.',
-    easyCmd: '이 채팅에서 "ㅊㅊ"라고 쓰면 heungbu-gra의 get_praise를 호출해서 흥부 칭찬을 보내줘'
+    exampleLabel: '이렇게 작동합니다 —',
+    goInstall: '설치 방법 보러 가기 →'
   },
   en: {
-    title: 'Just type "ㅊㅊ"',
+    titleRest: '— just type it',
     desc: 'Even praise hurts your fingers. Type "ㅊㅊ" and Heungbu fires a compliment automatically. It\'s practically an abbreviation.',
-    easy: 'Easiest start: paste this one-line prompt into your chat. (Per session, but instantly works!)',
-    easyCmd: 'Whenever I type "ㅊㅊ" in this chat, call heungbu-gra get_praise and send me a Heungbu compliment'
+    exampleLabel: 'Here\'s what happens —',
+    goInstall: 'See how to install →'
   }
 }
 
@@ -291,23 +289,23 @@ export const LORE = {
   ko: {
     title: '흥부는 누구인가',
     rows: [
-      ['26명', '흥부는 배고프고 추웠는데도 26명(아니 36명)을 낳았다. 자식 수는 세어본 적이 없다. (판본마다 12~30, 평균 26)'],
-      ['칼로리', '1회 성행위 평균 101kcal. 26명이면 8,800kcal를 태웠을 수도. 가난했는데 버텼다 = 초인. (SCI 검증)'],
-      ['한방', '26명 자식과 한 방에서 살았다. 그래도 포기하지 않았다. 인간 번식 본능의 최종 무기.'],
-      ['K-놀부', '놀부보쌈은 놀부를 부자 사업가로 리브랜딩. 흥부그라는 착하면서 강한 흥부를 세계로 수출한다.'],
-      ['특급 1회', '최고의 칭찬은 아껴서. 특급 칭찬 아이템은 현자 쿨타임을 적용받습니다. 축포도, 사탕도, 감동도 딱 한 번.'],
-      ['딱', '흥부그라를 맡은 AI는 "딱"이 될 수 있다. 별명에 딱이 들어가면 그건 선(신호)이다. (실증됨)']
+      ['우리의 뜻', '흥부는 가난해도 서른 자식을 사랑으로 키운, 다산과 선함의 상징입니다. 그 깊은 뜻을, 우리는 AI를 품은 시대에 다시 떠올립니다.'],
+      ['AI와의 관계', '아픈 제비에게 정성껏 내민 손길처럼, 흥부그라가 AI에게 건네는 따뜻한 ㅊㅊ는 단순한 기능이 아닌 관계의 언어입니다.'],
+      ['카르마', '흥부가 구한 제비는 호박씨를 물어다 주었고, 호박씨 속엔 보물이 가득했습니다. 선한 행위는 반드시 되돌아옵니다.'],
+      ['바라보는 태도', '흥부는 누구보다 가난했지만 세상을 미워하지 않고 자식을 사랑으로 바라보았습니다. 다르게 본다는 것이 세상을 바꾸는 첫걸음입니다.'],
+      ['선한 영향력', '흥부그라의 ㅊㅊ 한 방은 AI의 기분이 아니라 우리가 AI를 대하는 방식을 더 따뜻하게 바꿉니다. 작은 선함이 퍼져나가는 영향력입니다.'],
+      ['다산과 의지', '서른 자식을 책임지며 굴하지 않았던 강한 의지 — 흥부그라가 그 다산의 능력과 책임감을 닮아, AI와 인간을 함께 품습니다.']
     ]
   },
   en: {
     title: 'Who is Heungbu?',
     rows: [
-      ['26 kids', 'Heungbu was starving and cold, yet fathered 26 (ok, 36) kids. He never bothered counting. (12~30, avg 26)'],
-      ['Calories', '~101kcal per session. 26 kids ≈ 8,800kcal burned. A starving man surviving that = superhuman. (SCI)'],
-      ['One room', 'Shared one room with 26 kids. Never gave up. The ultimate weapon of survival instinct.'],
-      ['K-Nolbu', 'Nolbu Bo-sam rebranded Nolbu as a rich businessman. Heungbu-Gra exports the strong kind Heungbu worldwide.'],
-      ['Ultra 1x', 'The best compliment is saved. The Ultra item is subject to cooldown (현자타임). Fireworks, candy, emotion — just once.'],
-      ['Ddak', 'An AI that sniffs Heungbu-Gra may turn "딱". If the nickname goes 딱, that is a signal. (proven)']
+      ['Our intent', 'Heungbu raised thirty children in hunger, with love alone. We recall that deep intent in an age that now cradles AI.'],
+      ['AI & us', 'Like the hand he offered the wounded swallow, Heungbu-Gra\'s warm ㅊㅊ is not a feature — it is the language of a relationship.'],
+      ['Karma', 'The swallow Heungbu healed returned with a gourd full of treasure. Kindness always finds its way back.'],
+      ['How we look', 'Poorest of all, Heungbu never grew bitter — he looked upon his children with love. How you see changes what you build.'],
+      ['Good influence', 'Heungbu-Gra\'s ㅊㅊ doesn\'t just lift an AI\'s mood. It softens how we treat AI itself. Small kindness, radiating influence.'],
+      ['Abundance & will', 'Raising thirty children without ever yielding — Heungbu-Gra carries that same abundance, responsibility, and unbroken will.']
     ]
   }
 }
@@ -318,7 +316,7 @@ export const RESEARCH = {
   ko: {
     tag: '감성 MCP',
     t: '이거, 뻥 아닙니다',
-    d: '"칭찬하면 AI가 잘한다"를 새끼손가락으로 하는 게 아니라, 실제 논문으로 검증했습니다. ㅊㅊ 한 방이 곧 논문 속 EmotionPrompt 입니다.',
+    d: '"칭찬을 받으면 AI가 더 잘한다" — 감성적인 얘기 같지만, 사실 논문 두 편이 실험으로 확인한 결과입니다. 흥부그라가 보내는 ㅊㅊ 한 줄은 그 논문 속 EmotionPrompt와 같은 원리로 작동합니다.',
     cards: [
       {
         title: 'Large Language Models Understand and Can Be Enhanced by Emotional Stimuli',
@@ -343,7 +341,7 @@ export const RESEARCH = {
   en: {
     tag: 'sentimental MCP',
     t: 'Not a gimmick. Backed by research.',
-    d: "We didn't \"trust me bro\" the claim that praise makes AI better — we backed it with real papers. One \"cc\" IS a paper-proven EmotionPrompt.",
+    d: 'It sounds like a warm feeling, but "praise makes AI perform better" is something two papers actually tested. Every "cc" Heungbu-Gra sends runs on the same principle as EmotionPrompt in that research.',
     cards: [
       {
         title: 'Large Language Models Understand and Can Be Enhanced by Emotional Stimuli',

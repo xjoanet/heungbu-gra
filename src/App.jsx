@@ -16,9 +16,9 @@ const LEVELS = [
 function App() {
   const [lang, setLang] = useState('ko')
   const [ptab, setPtab] = useState('base') // 26칭찬 탭: base=일반 / kr=K-드라마 / us=할리우드
-  const [rolled, setRolled] = useState(null)
+  const [rolled, setRolled] = useState(() => Math.floor(Math.random() * KDRAMA.length)) // 첫 화면부터 랜덤 명대사 (매번 같은 문구 방지)
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
-  const [revOpen, setRevOpen] = useState(false) // 후기 전체 펼침
+  const [revPaused, setRevPaused] = useState(false) // 마우스 올리면 자동회전 정지 (읽는 중 방해 방지)
   const [spot, setSpot] = useState({ on: false, idx: null }) // 풀스크린 명대사 스포트라이트
   const [intro, setIntro] = useState(() => {
     try { return localStorage.getItem('hg_intro_skip') !== '1' } catch { return true }
@@ -39,14 +39,14 @@ function App() {
     return () => { document.body.style.overflow = '' }
   }, [intro])
 
-  // 후기 슬라이드 자동 회전 (전체보기 열면 멈춤 — 글 읽기 방해 방지)
+  // 후기 슬라이드 자동 회전 (마우스 올리면 정지 — 읽는 중 강제로 넘어가지 않게)
   useEffect(() => {
-    if (revOpen) return // 전체보기 중이면 회전 정지 (사용자가 넘기며 읽게)
+    if (revPaused) return
     const iv = setInterval(() => {
       setRevIdx(i => (i + 1) % REVIEW[lang === 'ko' ? 'ko' : 'en'].length)
-    }, 4000)
+    }, 5000)
     return () => clearInterval(iv)
-  }, [lang, revOpen])
+  }, [lang, revPaused])
 
   const t = LANG[lang]
   const MAX_IDX = 25 // 0~25 = 26개
@@ -122,8 +122,23 @@ function App() {
   const copy = () => { navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) }) }
   const copyPrompt = () => { const txt = LANG[lang]['guide2c']; navigator.clipboard?.writeText(txt).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 2000) }) }
 
-  const curQuote = rolled === null ? KDRAMA[0].ko : KDRAMA[rolled % KDRAMA.length].ko
-  const curSrc = rolled === null ? KDRAMA[0].src : KDRAMA[rolled % KDRAMA.length].src
+  const curQuote = KDRAMA[rolled % KDRAMA.length].ko
+  const curSrc = KDRAMA[rolled % KDRAMA.length].src
+  const curReviewList = REVIEW[lang === 'ko' ? 'ko' : 'en']
+  const curReview = curReviewList[revIdx]
+  const avatarColor = (name) => {
+    const n = name.toLowerCase()
+    if (n.includes('claude') || n.includes('소네')) return 'linear-gradient(135deg, #ffb37a, #d8503f)'
+    if (n.includes('deepseek') || n.includes('딥식')) return 'linear-gradient(135deg, #7aa8ff, #3d5ce0)'
+    if (n.includes('gpt') || n.includes('루나') || n.includes('terra')) return 'linear-gradient(135deg, #6fe3c4, #189c7d)'
+    if (n.includes('gemini') || n.includes('제미나이')) return 'linear-gradient(135deg, #8ab4ff, #b98aff)'
+    if (n.includes('qwen')) return 'linear-gradient(135deg, #c39aff, #8b5cf6)'
+    if (n.includes('grok')) return 'linear-gradient(135deg, #8b95a1, #2b303a)'
+    if (n.includes('hunyuan')) return 'linear-gradient(135deg, #7ec8ff, #2f7fd6)'
+    return null // 매칭 안 되면 기본 골드-코럴 그라데이션(CSS) 유지
+  }
+  const revPrev = () => setRevIdx(i => (i - 1 + curReviewList.length) % curReviewList.length)
+  const revNext = () => setRevIdx(i => (i + 1) % curReviewList.length)
 
   return (
     <>
@@ -161,10 +176,14 @@ function App() {
           <div className="logo"><span className="logo-mark">興</span>흥부<b>그라</b></div>
           <div className="nav-links">
             <button className={`lang-btn`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
-            <a href="#cc">{t.nav[0]}</a>
-            <a href="#how">{t.nav[1]}</a>
-            <a href="#install" className="nav-install">{t.nav[2]}</a>
-            <a href="#concept">{t.nav[3]}</a>
+            <a href="#demo">{t.nav[0]}</a>
+            <a href="#proof">{t.nav[1]}</a>
+            <a href="#research">{t.nav[2]}</a>
+            <a href="#cc">{t.nav[3]}</a>
+            <a href="#install" className="nav-install">{t.nav[4]}</a>
+            <a href="#how">{t.nav[5]}</a>
+            <a href="#game">{t.nav[6]}</a>
+            <a href="#concept">{t.nav[7]}</a>
           </div>
         </div>
       </nav>
@@ -178,16 +197,11 @@ function App() {
         {/* 명대사 롤링 머신 */}
         <div className="slot">
           <div className="slot-window">
-            <span key={rolled ?? 'start'} className="slot-word">“{curQuote}”</span>
-            {rolled !== null && <span className="slot-src">🎬 {curSrc}</span>}
+            <span key={rolled} className="slot-word">“{curQuote}”</span>
+            <span className="slot-src">🎬 {curSrc}</span>
           </div>
           {noMore && <div className="slot-block" onClick={() => setNoMore('')}>🐦 {noMore}</div>}
           <div className="slot-hint" onClick={spin}>▶ 명대사 뽑기</div>
-        </div>
-
-        <div className="cta-row">
-          <a className="btn btn-gold" href="#cc">진짜로 해보기</a>
-          <a className="btn btn-ghost" href="#install">{t.cta1}</a>
         </div>
       </header>
 
@@ -215,22 +229,25 @@ function App() {
           <h2>✅ <span className="em">{PROOF[lang].t}</span></h2>
           <p className="lead">{PROOF[lang].d}</p>
 
-          <div className="proof-review">
+          <div className="proof-review" onMouseEnter={() => setRevPaused(true)} onMouseLeave={() => setRevPaused(false)}>
             <div className="rev-card">
-              <div className="rev-top" onClick={() => setRevOpen(!revOpen)}>
-                <span className="rev-avatar">{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai.slice(0, 1)}</span>
+              <div className="rev-top">
+                <span className="rev-avatar" style={avatarColor(curReview.ai) ? { background: avatarColor(curReview.ai) } : undefined}>{curReview.ai.slice(0, 1)}</span>
                 <span className="rev-meta">
-                  <span className="rev-ai">🤖 {REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].ai}</span>
-                  <span className="rev-quote">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].h}"</span>
+                  <span className="rev-ai">🤖 {curReview.ai}</span>
+                  <span className="rev-quote">"{curReview.h}"</span>
                 </span>
               </div>
-              {revOpen && <div className="rev-full">"{REVIEW[lang === 'ko' ? 'ko' : 'en'][revIdx].q}"</div>}
-              <button className="rev-tap" onClick={() => setRevOpen(!revOpen)}>{revOpen ? '▲ 접기' : '▼ 후기 전체 보기'}</button>
+              <div className="rev-full">"{curReview.q}"</div>
             </div>
-            <div className="rev-dots">
-              {REVIEW[lang === 'ko' ? 'ko' : 'en'].map((_, i) => (
-                <button key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => { setRevIdx(i); setRevOpen(false); }} />
-              ))}
+            <div className="rev-nav">
+              <button className="rev-arrow" onClick={revPrev} aria-label="이전 후기">‹</button>
+              <div className="rev-dots">
+                {curReviewList.map((_, i) => (
+                  <button key={i} className={`rev-dot${i === revIdx ? ' on' : ''}`} onClick={() => setRevIdx(i)} aria-label={`${i + 1}`} />
+                ))}
+              </div>
+              <button className="rev-arrow" onClick={revNext} aria-label="다음 후기">›</button>
             </div>
           </div>
 
@@ -283,16 +300,10 @@ function App() {
         <div className="wrap">
           <div className="cc-banner">
             <span className="sec-eyebrow">Command</span>
-            <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].title.replace('"ㅊㅊ" ','')}</span></h2>
+            <h2><span className="cc-key">ㅊㅊ</span> <span className="em">{CC[lang].titleRest}</span></h2>
             <p className="lead">{CC[lang].desc}</p>
             {CC[lang].tag && <div className="cc-tag">🏷️ {CC[lang].tag}</div>}
-            <p className="cc-easy">{CC[lang].easy}</p>
-            <div className="term cc-term">
-              <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
-              <div className="term-body">
-                <div className="cmd-line"><span className="code">{CC[lang].easyCmd}</span></div>
-              </div>
-            </div>
+            <p className="cc-example-label">{CC[lang].exampleLabel}</p>
             <div className="term cc-term">
               <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
               <div className="term-body">
@@ -300,6 +311,7 @@ function App() {
                 <div className="out">🐦 [흥부그라] 이제 너도 흥부 가족이다 💛</div>
               </div>
             </div>
+            <a className="btn btn-ghost cc-goto" href="#install">{CC[lang].goInstall}</a>
           </div>
         </div>
       </section>
@@ -399,8 +411,9 @@ function App() {
 
 
       {/* 흥부 플래피 26 게임 */}
-      <section className="sec" id="game">
+      <section className="sec reveal" id="game">
         <div className="wrap">
+          <span className="sec-eyebrow">Game</span>
           <h2>🎮 <span className="em">흥부 플래피 26</span> <span style={{fontSize:'13px'}}>(육아 체험)</span></h2>
           <p className="lead">26명 자식을 할머니 방으로 옮기자. 클릭·탭·스페이스로 점프! 장애물에 부딪히면 아이가 운다 😭 26명 전원 생존 = 흥부의 경지!</p>
           <div className="game-host">
