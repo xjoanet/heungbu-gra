@@ -27,14 +27,14 @@ function App() {
   const introIdx = useRef(Math.floor(Math.random() * KDRAMA.length)).current // 랜덤 명대사 고정
   const timer = useRef(null)
 
-  // 후기 슬라이드 자동 회전 (리뷰 수 기반, 랭 변경 시 0으로)
+  // 후기 슬라이드 자동 회전 (전체보기 열면 멈춤 — 글 읽기 방해 방지)
   useEffect(() => {
-    setRevIdx(0)
+    if (revOpen) return // 전체보기 중이면 회전 정지 (사용자가 넘기며 읽게)
     const iv = setInterval(() => {
       setRevIdx(i => (i + 1) % REVIEW[lang === 'ko' ? 'ko' : 'en'].length)
     }, 4000)
     return () => clearInterval(iv)
-  }, [lang])
+  }, [lang, revOpen])
 
   const t = LANG[lang]
   const MAX_IDX = 25 // 0~25 = 26개
