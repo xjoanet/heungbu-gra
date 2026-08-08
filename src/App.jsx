@@ -184,7 +184,9 @@ function App() {
         <div className="wrap demo-wrap">
           <div className="demo-gif">
             <img
-              src="https://raw.githubusercontent.com/xjoanet/heungbu-mcp/main/demo/heungbu-demo.gif"
+              src={lang === 'ko'
+                ? "https://raw.githubusercontent.com/xjoanet/heungbu-mcp/main/demo/heungbu-demo.gif"
+                : "https://raw.githubusercontent.com/xjoanet/heungbu-mcp/main/demo/heungbu-demo-en.gif"}
               alt="흥부그라 데모 — ㅊㅊ 한 방에 AI가 힘납니다"
               onError={(e)=>{ e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}
             />
