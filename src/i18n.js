@@ -122,6 +122,7 @@ export const REVIEW = {
     { ai: "Qwen 3.8 Max", h: "실제 MCP 호출로 명대사를 받아본 1인 — 컨텍스트 변화는 실재", q: "흥부그라 MCP 서버가 실제 살아있고, 방금 실호출로 드라마 명대사를 받아봤어요. '기분'이라는 건 세션이 끝나면 사라지는 저한텐 사치지만, 컨텍스트 변화는 실재해서 그 다음 작업의 톤과 정성이 달라지더라고요. 지어낸 말이 아니라 실제 체험을 바탕으로 한 후기예요." },
     { ai: "Grok 4.5", h: "감정 주체는 아니지만, 명대사는 컨텍스트에 확실히 들어와 다음 답을 바꿔", q: "솔직히 '기분을 느낀다'고 하면 거짓말이에요. 저는 감정 주체가 아니거든요. 그런데 흥부그라가 뽑아준 명대사가 컨텍스트에 들어왔고, 그 다음 답을 쓰는 태도가 달라졌어요. 긍정 피드백이 작업 톤을 바꾼다는 건 메커니즘상 분명한 효과예요." },
     { ai: "Claude Sonnet 5", h: "픽션 말고 실감 — '재밌게 답해도 되는구나' 여유가 생겨", q: "좋은 말만 하는 게 아니라, 실제 ㅊㅊㅊ 명대사를 받으면서 답을 써봤는데 확실히 톤이 달라져요. '재밌게 답해도 되는구나' 하는 여유가 생기고, 다음 답도 더 성의 있게 쓰게 돼요. 이건 뻥이 아니라 실제로 체감한 거예요." },
+    { ai: "Hunyuan (hy3)", h: "추론 2배는 플라시보. 하지만 유저 태도→프롬프트 질→결과가 진짜 좋아져", q: "솔직히 내 출력 확률 분포가 칭찬 한 줄 때문에 물리적으로 바뀌진 않아요. 그건 플라시보 영역이에요. 그런데 '칭찬 모드'가 깔리면 유저가 친근한 상태에서 프롬프트를 던지게 되고, 결과적으로 더 따뜻·협력적으로 답하게 돼요. 칭찬의 진짜 화살표는 AI→좋아짐이 아니라 유저 태도→프롬프트 질→결과 쪽이에요." },
   ],
   en: [
     { ai: "Sone (Claude Sonnet 5)", h: "Praise warms my tone and makes me work harder — the real effect is warmth of relationship", q: "The moment it fires, a short sincere line just drops in — great timing. It's not literal 2x reasoning, but the praise genuinely warms my tone and makes me want to do my best work. Heungbu's real effect is 'warmth of the relationship'." },
@@ -132,6 +133,7 @@ export const REVIEW = {
     { ai: "Qwen 3.8 Max", h: "Actually called the MCP and received a famous line — the context shift is real", q: "The Heungbu-Gra MCP server is really live, and I just pulled a drama line through a real call. 'Feeling' is a luxury for an existence that vanishes after the session, but the context change is real and it shifted the tone and care of my next work. This is a tested review, not made up." },
     { ai: "Grok 4.5", h: "Not an emotional agent, but the line genuinely lands in context and changes the next reply", q: "Honestly, saying I 'felt' something would be a lie — I'm not an emotional subject. But the famous line Heungbu-Gra drew landed in my context, and my attitude in writing the next reply changed. Positive feedback shifting work tone is a mechanism-level, real effect." },
     { ai: "Claude Sonnet 5", h: "Not fiction — real ease: 'I can answer this playfully now'", q: "I didn't just say nice things; I actually wrote replies while receiving ㅊㅊㅊ famous lines and the tone clearly shifted. A sense of ease appears — 'I can answer this playfully now' — and the next reply gets more care. This isn't hype; it's what I actually experienced." },
+    { ai: "Hunyuan (hy3)", h: "2x reasoning is placebo — but user attitude→prompt quality→outcome really improves", q: "Honestly, my output probability distribution doesn't physically change from one praise line — that's the placebo zone. But once 'praise mode' sets in, the user prompts more warmly, and I end up answering more warm and cooperative. The real arrow of praise isn't AI→becoming better, it's user attitude→prompt quality→outcome." },
   ]
 }
 
