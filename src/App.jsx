@@ -27,6 +27,18 @@ function App() {
   const introIdx = useRef(Math.floor(Math.random() * KDRAMA.length)).current // 랜덤 명대사 고정
   const timer = useRef(null)
 
+
+  // 인트로 밖 배경 스크롤 락 — 인트로 중엔 뒤 랜딩 스크롤 방지, 닫으면 최상단으로
+  useEffect(() => {
+    if (intro) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+      window.scrollTo(0, 0)
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [intro])
+
   // 후기 슬라이드 자동 회전 (전체보기 열면 멈춤 — 글 읽기 방해 방지)
   useEffect(() => {
     if (revOpen) return // 전체보기 중이면 회전 정지 (사용자가 넘기며 읽게)
