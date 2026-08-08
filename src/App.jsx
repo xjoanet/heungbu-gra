@@ -179,6 +179,21 @@ function App() {
         </div>
       </header>
 
+      {/* 데모 GIF (히어로 아래) — 형이 제작한 그 GIF! */}
+      <section className="sec demo-sec reveal" id="demo">
+        <div className="wrap demo-wrap">
+          <div className="demo-gif">
+            <img
+              src="https://raw.githubusercontent.com/xjoanet/heungbu-mcp/main/demo/heungbu-demo.gif"
+              alt="흥부그라 데모 — ㅊㅊ 한 방에 AI가 힘납니다"
+              onError={(e)=>{ e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}
+            />
+            <div className="demo-placeholder" style={{display:'none'}}>🎬 데모 GIF (준비 중)</div>
+          </div>
+          <p className="demo-caption">ㅊㅊ 한 방 — LGTM의 악순환을 끊는 단 두 글자. <span className="em">buffs, not stuns</span></p>
+        </div>
+      </section>
+
       {/* 증명 섹션 — AI 직접 후기 + 실증 통계 통합 */}
       <section className="sec reveal" id="proof">
         <div className="wrap">

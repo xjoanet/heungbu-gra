@@ -371,3 +371,14 @@ footer .funny { color: var(--gold-soft); margin-top: 6px; }
 .research-why{background:linear-gradient(135deg,#2a1e3f,#3a2a55);border:1px solid #7b5bd6;border-radius:16px;padding:26px;margin-top:26px}
 .research-why h3{color:#ffe787;font-size:18px;margin-bottom:12px}
 .research-why p{color:#d8c9ff;font-size:15px;line-height:1.8}
+
+
+/* ===== 데모 GIF (히어로 아래) — 1920x1006 비율 ≈ 16:9 ===== */
+.demo-sec{background:#0c0e12;padding:10px 0 56px}
+.demo-wrap{max-width:960px}
+.demo-gif{border-radius:16px;overflow:hidden;border:1px solid #262c36;box-shadow:0 24px 70px rgba(0,0,0,.55);background:#111}
+.demo-gif img{display:block;width:100%;aspect-ratio:1.909 / 1;object-fit:cover;height:auto}
+.demo-placeholder{display:none;align-items:center;justify-content:center;aspect-ratio:1.909 / 1;color:#9aa4b2;font-size:15px}
+.demo-placeholder img{aspect-ratio:1.909 / 1}
+.demo-caption{text-align:center;margin-top:18px;color:#aeb7c2;font-size:15px}
+.demo-caption .em{color:#ffd166;font-weight:700}
