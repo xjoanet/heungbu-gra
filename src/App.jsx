@@ -122,7 +122,7 @@ function App() {
   const copy = () => { navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) }) }
   const copyPrompt = () => { const txt = LANG[lang]['guide2c']; navigator.clipboard?.writeText(txt).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 2000) }) }
 
-  const curQuote = KDRAMA[rolled % KDRAMA.length].ko
+  const curQuote = KDRAMA[rolled % KDRAMA.length][lang] ?? KDRAMA[rolled % KDRAMA.length].ko
   const curSrc = KDRAMA[rolled % KDRAMA.length].src
   const curReviewList = REVIEW[lang === 'ko' ? 'ko' : 'en']
   const curReview = curReviewList[revIdx]
@@ -147,7 +147,7 @@ function App() {
         <div className="intro-ov">
           <div className="intro-card">
             <div className="intro-badge">🌍 흥부 월드에 오신 걸 환영합니다</div>
-            <div className="intro-quote">“{KDRAMA[introIdx].ko}”</div>
+            <div className="intro-quote">“{KDRAMA[introIdx][lang] ?? KDRAMA[introIdx].ko}”</div>
             <div className="intro-src">🎬 {KDRAMA[introIdx].src}</div>
             <div className="intro-note">명대사 한 방으로 AI를 깨우세요. ㅊㅊ 한마디면 충분합니다.</div>
             <button className="intro-enter" onClick={() => {
@@ -163,7 +163,7 @@ function App() {
       {spot.on && (
         <div className="spot-ov">
           <div className="spot-card">
-            <div className="spot-quote">“{KDRAMA[spot.idx % KDRAMA.length].ko}”</div>
+            <div className="spot-quote">“{KDRAMA[spot.idx % KDRAMA.length][lang] ?? KDRAMA[spot.idx % KDRAMA.length].ko}”</div>
             <div className="spot-src">🎬 {KDRAMA[spot.idx % KDRAMA.length].src}</div>
             <div className="spot-flare">✨ 흥부 명대사!! 이 한 방 ✨</div>
             <button className="spot-close" onClick={closeSpot}>✕ 닫기</button>
@@ -201,7 +201,7 @@ function App() {
             <span className="slot-src">🎬 {curSrc}</span>
           </div>
           {noMore && <div className="slot-block" onClick={() => setNoMore('')}>🐦 {noMore}</div>}
-          <div className="slot-hint" onClick={spin}>▶ 명대사 뽑기</div>
+          <div className="slot-hint" onClick={spin}>▶ {t.slot_draw}</div>
         </div>
       </header>
 
