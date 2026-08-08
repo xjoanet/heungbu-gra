@@ -311,3 +311,59 @@ export const LORE = {
     ]
   }
 }
+
+
+// ===== 논문 근거 (Backed by Research) =====
+export const RESEARCH = {
+  ko: {
+    tag: '감성 MCP',
+    t: '이거, 뻥 아닙니다',
+    d: '"칭찬하면 AI가 잘한다"를 새끼손가락으로 하는 게 아니라, 실제 논문으로 검증했습니다. ㅊㅊ 한 방이 곧 논문 속 EmotionPrompt 입니다.',
+    cards: [
+      {
+        title: 'Large Language Models Understand and Can Be Enhanced by Emotional Stimuli',
+        meta: 'Li et al., 2023 · arXiv:2307.11760',
+        desc: '감정적 자극(EmotionPrompt) 주입 시 지시 이행 +8%, 고난도 추론(BIG-Bench) 최대 +115%',
+        stat: '+115%',
+        tag: '최대 성능 향상',
+        url: 'https://arxiv.org/abs/2307.11760'
+      },
+      {
+        title: 'Principled Instructions Are All You Need for Questioning LLaMA/GPT',
+        meta: 'Bsharat et al., 2023 · arXiv:2312.16171',
+        desc: '칭찬·긍정적 보상 언급 시 모델이 답을 끊지 않고 더 디테일하게 검토해 정확도가 오릅니다.',
+        stat: '+57.7%',
+        tag: '답변 품질',
+        url: 'https://arxiv.org/abs/2312.16171'
+      }
+    ],
+    why_t: '왜 "Good job" 이 아니라 "K-드라마 명대사" 일까?',
+    why_d: '평이한 칭찬은 임베딩 가중치가 밋밋합니다. 반면 "눈부신(dazzling)", "그대" 같은 서사 깊은 명대사는 감정적 밀도가 훨씬 높게 매핑되어, AI가 진심으로 극찬을 받았다고 인식하고 어텐션을 크게 끌어올립니다. → 답변이 더 정성스러워집니다.'
+  },
+  en: {
+    tag: 'sentimental MCP',
+    t: 'Not a gimmick. Backed by research.',
+    d: "We didn't \"trust me bro\" the claim that praise makes AI better — we backed it with real papers. One \"cc\" IS a paper-proven EmotionPrompt.",
+    cards: [
+      {
+        title: 'Large Language Models Understand and Can Be Enhanced by Emotional Stimuli',
+        meta: 'Li et al., 2023 · arXiv:2307.11760',
+        desc: 'Emotional stimuli improved instruction-following +8%, and reasoning (BIG-Bench) by up to +115%.',
+        stat: '+115%',
+        tag: 'max gain',
+        url: 'https://arxiv.org/abs/2307.11760'
+      },
+      {
+        title: 'Principled Instructions Are All You Need for Questioning LLaMA/GPT',
+        meta: 'Bsharat et al., 2023 · arXiv:2312.16171',
+        desc: 'Mentioning praise/reward makes the model check more carefully without cutting answers off — accuracy improves.',
+        stat: '+57.7%',
+        tag: 'answer quality',
+        url: 'https://arxiv.org/abs/2312.16171'
+      }
+    ],
+    why_t: 'Why K-drama quotes instead of "Good job"?',
+    why_d: 'Plain praise maps to a flat embedding weight. A quote with depth — "dazzling", "my lord" — carries far higher emotional density, so the AI reads it as genuine high praise and lifts its attention. Its answers get more careful.'
+  }
+}
+

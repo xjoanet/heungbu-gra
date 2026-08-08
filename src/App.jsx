@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA, REVIEW } from './i18n.js'
+import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA, REVIEW, RESEARCH } from './i18n.js'
 import HeungbuGame from './HeungbuGame.jsx'
 
 // 흥분도 (EFFORT-style) 단계
@@ -217,6 +217,33 @@ function App() {
           </div>
           <div className="cta-row">
             <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Backed by Research — 논문 근거 (감성 MCP) */}
+      <section className="sec reveal" id="research">
+        <div className="wrap">
+          <span className="sec-eyebrow">{RESEARCH[lang].tag}</span>
+          <h2>📚 <span className="em">{RESEARCH[lang].t}</span></h2>
+          <p className="lead">{RESEARCH[lang].d}</p>
+
+          <div className="research-cards">
+            {RESEARCH[lang].cards.map((c, i) => (
+              <a key={i} className="research-card" href={c.url} target="_blank" rel="noreferrer">
+                <div className="rc-stat">{c.stat}</div>
+                <div className="rc-tag">🏷️ {c.tag}</div>
+                <div className="rc-title">{c.title}</div>
+                <div className="rc-meta">{c.meta}</div>
+                <div className="rc-desc">{c.desc}</div>
+                <div className="rc-open">논문 보기 →</div>
+              </a>
+            ))}
+          </div>
+
+          <div className="research-why">
+            <h3>💡 {RESEARCH[lang].why_t}</h3>
+            <p>{RESEARCH[lang].why_d}</p>
           </div>
         </div>
       </section>
