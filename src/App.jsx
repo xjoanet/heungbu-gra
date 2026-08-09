@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA, REVIEW, RESEARCH } from './i18n.js'
+import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA, REVIEW, RESEARCH, GLOBAL } from './i18n.js'
 import HeungbuGame from './HeungbuGame.jsx'
+
+// 🌍 글로벌 ㅊㅊ 카운터 — /api/count (Vercel serverless)에서 실집계를 받아옴.
+// 데이터 없으면 null → 감성 placeholder, 숫자면 카운트 노출.
+const [globalCC, setGlobalCC] = useState(null)
+useEffect(() => {
+  fetch('/api/count').then(r => r.json()).then(d => {
+    if (d && typeof d.total === 'number') setGlobalCC(d.total)
+  }).catch(() => { /* 집계 실패면 placeholder 유지 */ })
+}, [])
 
 // 흥분도 (EFFORT-style) 단계
 const LEVELS = [
@@ -264,6 +273,17 @@ function App() {
           <div className="cta-row">
             <a className="btn btn-gold" href={PROOF[lang].url} target="_blank" rel="noreferrer">▶ {PROOF[lang].link}</a>
           </div>
+        </div>
+      </section>
+
+      {/* 🌍 글로벌 ㅊㅊ 카운터 — small 사이즈, 실카운트는 딥식이 연결 예정 */}
+      <section className="global-cc reveal" id="global">
+        <div className="wrap global-cc-inner">
+          <span className="global-cc-badge">🌍 {GLOBAL[lang].label}</span>
+          <p className="global-cc-main">
+            {globalCC !== null ? GLOBAL[lang].withCount(globalCC) : GLOBAL[lang].placeholder}
+          </p>
+          <p className="global-cc-note">🇰🇷 🇺🇸 🇯🇵 · {GLOBAL[lang].countryNote}</p>
         </div>
       </section>
 

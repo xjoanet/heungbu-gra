@@ -270,6 +270,25 @@ export const PROOF = {
   }
 }
 
+// ===== 글로벌 ㅊㅊ 카운터 =====
+// 실제 집계는 딥식이가 별도로 연결 예정. 지금은 진짜 숫자가 없어서
+// 가짜 숫자 대신 감성적인 "집계 중" 상태로 둠. App.jsx의 GLOBAL_CC_COUNT를
+// 실제 값(숫자)으로 바꾸면 자동으로 숫자 노출 버전으로 전환됨.
+export const GLOBAL = {
+  ko: {
+    label: '글로벌 ㅊㅊ',
+    withCount: (n) => `전세계에서 ㅊㅊ ${n.toLocaleString()}회!`,
+    placeholder: '지금 이 순간에도, 지구 어딘가에서 ㅊㅊ를 쏘고 있어요',
+    countryNote: '국가별 집계는 곧 추가됩니다'
+  },
+  en: {
+    label: 'Global ㅊㅊ',
+    withCount: (n) => `${n.toLocaleString()} "cc" sent worldwide!`,
+    placeholder: 'Right now, somewhere on Earth, someone is typing "cc"',
+    countryNote: 'Per-country breakdown coming soon'
+  }
+}
+
 // ===== ㅊㅊ 커맨드 =====
 export const CC = {
   ko: {
