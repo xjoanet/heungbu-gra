@@ -2,15 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { LANG, PRAISE, PRAISE_HIGH, LORE, PROOF, CC, HOLIYWOOD, KDRAMA, REVIEW, RESEARCH, GLOBAL } from './i18n.js'
 import HeungbuGame from './HeungbuGame.jsx'
 
-// 🌍 글로벌 ㅊㅊ 카운터 — /api/count (Vercel serverless)에서 실집계를 받아옴.
-// 데이터 없으면 null → 감성 placeholder, 숫자면 카운트 노출.
-const [globalCC, setGlobalCC] = useState(null)
-useEffect(() => {
-  fetch('/api/count').then(r => r.json()).then(d => {
-    if (d && typeof d.total === 'number') setGlobalCC(d.total)
-  }).catch(() => { /* 집계 실패면 placeholder 유지 */ })
-}, [])
-
 // 흥분도 (EFFORT-style) 단계
 const LEVELS = [
   { id: 'minimal', label: 'Minimal', heart: '▪️' },
@@ -35,7 +26,14 @@ function App() {
   const [introSkip, setIntroSkip] = useState(false) // 다시 안 보기 체크
   const introIdx = useRef(Math.floor(Math.random() * KDRAMA.length)).current // 랜덤 명대사 고정
   const timer = useRef(null)
+  const [globalCC, setGlobalCC] = useState(null) // 🌍 글로벌 ㅊㅊ 실집계 (딥식이 /api/count 연결). null=아직 집계 전(감성 placeholder)
 
+  // 글로벌 ㅊㅊ 카운트 조회 — 실패해도 조용히 placeholder 유지 (에러로 페이지 안 깨지게)
+  useEffect(() => {
+    fetch('/api/count').then(r => r.json()).then(d => {
+      if (d && typeof d.total === 'number') setGlobalCC(d.total)
+    }).catch(() => { /* 집계 실패면 placeholder 유지 */ })
+  }, [])
 
   // 인트로 밖 배경 스크롤 락 — 인트로 중엔 뒤 랜딩 스크롤 방지, 닫으면 최상단으로
   useEffect(() => {
