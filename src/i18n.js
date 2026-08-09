@@ -29,7 +29,7 @@ export const LANG = {
     badge: 'AI Sentimental MCP · Motivation Model Context Protocol',
     h1_1: 'Add poetry to cold code.',
     h1_2: 'A sentimental MCP that turns praise into two keystrokes —',
-    h1em: 'Just 채채',
+    h1em: 'Just chch',
     sub: 'Type "cc" and Heungbu hands your AI a line straight out of a K-drama. Which one will you get today? Pull it below and find out.',
     slot_draw: '▶ Draw a drama line',
     ins_t: '3-second install', ins_d: 'Attach it to Claude, Cursor, or Hermes as an MCP — that\'s it.',
