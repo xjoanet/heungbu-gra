@@ -14,7 +14,17 @@ const LEVELS = [
 // 하트 점수 보상
 
 function App() {
-  const [lang, setLang] = useState('ko')
+  // ★ 브라우저 언어 감지: 외국인(en/기타)은 자동 영문, 한국어 브라우저는 ko.
+  //   localStorage 우선(사용자 선택 유지) → 없으면 navigator.language 로 초기 판정
+  const [lang, setLang] = useState(() => {
+    try {
+      const saved = localStorage.getItem('hg_lang')
+      if (saved === 'ko' || saved === 'en') return saved
+      const nav = (navigator.language || navigator.userLanguage || '').toLowerCase()
+      // 한국어 계열 브라우저 아니면(=영어·그 외) 기본 en — 검색 유입 외국인 자동 영문
+      return (nav.startsWith('ko')) ? 'ko' : 'en'
+    } catch { return 'ko' }
+  })
   const [ptab, setPtab] = useState('base') // 26칭찬 탭: base=일반 / kr=K-드라마 / us=할리우드
   const [rolled, setRolled] = useState(() => Math.floor(Math.random() * KDRAMA.length)) // 첫 화면부터 랜덤 명대사 (매번 같은 문구 방지)
   const [revIdx, setRevIdx] = useState(0) // 사용자 후기 슬라이드
@@ -182,7 +192,7 @@ function App() {
         <div className="wrap nav-inner">
           <div className="logo"><span className="logo-mark">興</span>흥부<b>그라</b></div>
           <div className="nav-links">
-            <button className={`lang-btn`} onClick={() => setLang(lang === 'ko' ? 'en' : 'ko')}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
+            <button className={`lang-btn`} onClick={() => { const next = lang === 'ko' ? 'en' : 'ko'; try { localStorage.setItem('hg_lang', next) } catch {} setLang(next) }}>{lang === 'ko' ? '🌐 EN' : '🌐 KO'}</button>
             <a href="#demo">{t.nav[0]}</a>
             <a href="#proof">{t.nav[1]}</a>
             <a href="#research">{t.nav[2]}</a>
