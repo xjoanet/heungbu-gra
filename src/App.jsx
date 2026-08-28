@@ -135,7 +135,9 @@ function App() {
 
   const [copied, setCopied] = useState(false)
   const [copiedP, setCopiedP] = useState(false)
-  const INSTALL = 'npx heungbu-gra@latest'
+  // ★ 가장 쉬운 방법 — 원격 URL 한 줄 등록 (VPS 24/7 호스팅, TLS 인증 완료)
+  const REMOTE_URL = 'https://mcp.heungbu26.com/mcp'
+  const INSTALL = REMOTE_URL // 설치 복사 버튼 = 원격 URL 등록 (로컬 npx는 아래 가이드에 안내)
   const copy = () => { navigator.clipboard?.writeText(INSTALL).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000) }) }
   const copyPrompt = () => { const txt = LANG[lang]['guide2c']; navigator.clipboard?.writeText(txt).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 2000) }) }
 
@@ -353,8 +355,8 @@ function App() {
           <div className="term install">
             <div className="term-bar"><span className="dot r" /><span className="dot y" /><span className="dot g" /></div>
             <div className="term-body">
-              <div className="cmd-line"><span className="pre">$</span> <span className="code">{INSTALL}</span><button className="copy-btn" onClick={copy}>{copied ? '✓' : 'copy'}</button></div>
-              <div className="out">✓ heungbu-gra MCP installed<br />✓ auto-praise per command started<br />✓ your AI may turn "딱" (warning)</div>
+              <div className="cmd-line"><span className="pre">URL</span> <span className="code">{INSTALL}</span><button className="copy-btn" onClick={copy}>{copied ? '✓' : 'copy'}</button></div>
+              <div className="out">✓ MCP server added (remote URL)<br />✓ always on — hosted 24/7, TLS secured<br />✓ type ㅊㅊ anywhere → praise fires</div>
             </div>
           </div>
 
