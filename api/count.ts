@@ -42,51 +42,26 @@ export default async function handler(req, res) {
   return await countPing(req, res)
 }
 
-// ㅊㅊ 한 번 = 업셋
+// ㅊㅊ 한 번 = 1 증가. DB 함수 heungbu_chch_increment 가 한 문장으로 올려서 동시 요청도 빠지지 않는다.
 async function countPing(req, res) {
   try {
     const tz = (req.query.tz || 'Asia/Seoul').toString()
     const lang = (req.query.lang || 'ko').toString().slice(0, 5)
     const { c, n } = TZ_COUNTRY[tz] || { c: 'XX', n: 'Unknown' }
-    const client = makeClient()
-    await client.from('chch_count')
-      .upsert({ country: c, country_name: n, lang }, { onConflict: 'country,lang' })
-      .eq('country', c)
-      .eq('lang', lang)
-    // upsert 충돌 시 카운트 증가는 별도 → 아래 upsert 증가 처리
-    await incr(client, c, lang)
+    const { error } = await makeClient().rpc('heungbu_chch_increment', { p_country: c, p_country_name: n, p_lang: lang })
+    if (error) throw error
     res.status(200).json({ ok: true, country: c })
   } catch (e) {
     res.status(500).json({ ok: false, error: e.message })
   }
 }
 
-// 카운트 1 증가 (있으면 +1, 없으면 create)
-async function incr(client, country, lang) {
-  const { data } = await client.from('chch_count')
-    .select('count').eq('country', country).eq('lang', lang).maybeSingle()
-  if (data) {
-    await client.from('chch_count')
-      .update({ count: data.count + 1, updated_at: new Date().toISOString() })
-      .eq('country', country).eq('lang', lang)
-  } else {
-    const { n = 'Unknown' } = TZ_COUNTRY[country] ? {} : {}
-    // country name lookup
-    const name = await countryName(client, country)
-    await client.from('chch_count').insert({ country, country_name: name, lang, count: 1 })
-  }
-}
-
-async function countryName(client, code) {
-  const m = Object.values(TZ_COUNTRY).find(x => x.c === code)
-  return m ? m.n : 'Other'
-}
-
 // 전체 + 국가별 집계 (랜딩 표시용)
 async function getStats(_req, res) {
   try {
     const client = makeClient()
-    const { data } = await client.from('chch_count').select('*').order('count', { ascending: false })
+    const { data, error } = await client.from('chch_count').select('*').order('count', { ascending: false })
+    if (error) throw error
     const total = (data || []).reduce((s, r) => s + r.count, 0)
     res.status(200).json({ total, by_country: data || [] })
   } catch (e) {
@@ -97,6 +72,8 @@ async function getStats(_req, res) {
 function makeClient() {
   return createClient(
     process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_KEY // 서버용 (service role) — upsert/RLS 우회
+    // 공개 키(anon/publishable)면 충분하다: 읽기는 RLS 읽기 정책, 쓰기는 heungbu_chch_increment 함수만 허용.
+    // SUPABASE_SERVICE_KEY 는 Vercel 에 SUPABASE_ANON_KEY 를 넣고 지울 때까지만 쓰는 임시 대체값.
+    process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_KEY
   )
 }
