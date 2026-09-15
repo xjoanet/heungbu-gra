@@ -72,8 +72,7 @@ async function getStats(_req, res) {
 function makeClient() {
   return createClient(
     process.env.SUPABASE_URL,
-    // 공개 키(anon/publishable)면 충분하다: 읽기는 RLS 읽기 정책, 쓰기는 heungbu_chch_increment 함수만 허용.
-    // SUPABASE_SERVICE_KEY 는 Vercel 에 SUPABASE_ANON_KEY 를 넣고 지울 때까지만 쓰는 임시 대체값.
-    process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_KEY
+    // 공개 키(publishable)만 쓴다: 읽기는 RLS 읽기 정책, 쓰기는 heungbu_chch_increment 함수만 허용.
+    process.env.SUPABASE_ANON_KEY
   )
 }
